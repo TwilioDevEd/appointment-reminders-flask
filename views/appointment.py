@@ -1,4 +1,5 @@
 from flask.views import MethodView
+from flask import render_template
 from models.appointment import Appointment
 import datetime
 
@@ -10,4 +11,4 @@ class AppointmentResource(MethodView):
         appt = Appointment('A name', '+54853435', 120, datetime.datetime.now(), 'Americas/Guayaquil')
         self.db.session.add(appt)
         self.db.session.commit()
-        return "something"
+        return render_template('base.j2.html', name=None)
