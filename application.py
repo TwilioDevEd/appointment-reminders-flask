@@ -11,15 +11,16 @@ class Route(object):
 
 class Application(object):
     def __init__(self, routes):
-        self.app = flask.Flask(__name__)
-        self.app.config['SQL_ALCHEMY_DATABASE_URI'] = self._connection_string()
-        self.db = flask.ext.sqlalchemy.SQLAlchemy(self.app)
+        self.flask_app = flask.Flask(__name__)
+        print(self._connection_string())
+        self.flask_app.config['SQLALCHEMY_DATABASE_URI'] = self._connection_string()
+        self.db = flask.ext.sqlalchemy.SQLAlchemy(self.flask_app)
         self.routes = routes
 
     def start_app(self):
         for route in self.routes:
-           self.app.add_url_rule(route.url, view_func=route.resource.as_view(''))
-        self.app.run()
+           self.flask_app.add_url_rule(route.url, view_func=route.resource.as_view(''))
+        self.flask_app.run()
 
     def _connection_string(self):
         return config.database.DatabaseConfiguration().connection_string()

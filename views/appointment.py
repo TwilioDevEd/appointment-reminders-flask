@@ -1,4 +1,6 @@
 from flask.views import MethodView
+from datetime import datetime
+
 
 class AppointmentResource(MethodView):
 
