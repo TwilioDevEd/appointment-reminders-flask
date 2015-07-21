@@ -21,7 +21,7 @@ def upgrade():
         'appointments',
         sa.Column('id', sa.Integer, primary_key=True),
         sa.Column('name', sa.String(50), nullable=False),
-        sa.Column('phoneNumber', sa.String(50), nullable=False),
+        sa.Column('phone_number', sa.String(50), nullable=False),
         sa.Column('delta', sa.Integer, nullable=False),
         sa.Column('time', sa.DateTime, nullable=False),
         sa.Column('timezone', sa.String(50), nullable=False)

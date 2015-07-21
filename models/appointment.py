@@ -1,17 +1,17 @@
-import sys
-import os
-from application import db
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, DateTime, String
 
+Base = declarative_base()
 
-class Appointment(db.Model):
+class Appointment(Base):
     __tablename__ = 'appointments'
 
-    appointment_id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False)
-    phone_number = db.Column(db.String(50), nullable=False)
-    delta = db.Column(db.Integer, nullable=False)
-    time = db.Column(db.DateTime, nullable=False)
-    timezone = db.Column(db.String(50), nullable=False)
+    id = Column(Integer, primary_key=True)
+    name = Column(String(50), nullable=False)
+    phone_number = Column(String(50), nullable=False)
+    delta = Column(Integer, nullable=False)
+    time = Column(DateTime, nullable=False)
+    timezone = Column(String(50), nullable=False)
 
     def __init__(self, name, phone_number, delta, time, timezone):
         self.name = name
