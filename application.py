@@ -1,8 +1,8 @@
 import flask
 import dotenv
-import config.database
 import flask.ext.sqlalchemy
 import views.appointment
+from config.database import DatabaseConfiguration
 
 class Route(object):
     def __init__(self, url, resource):
@@ -26,4 +26,4 @@ class Application(object):
         self.flask_app.run(debug=True)
 
     def _connection_string(self):
-        return config.database.DatabaseConfiguration().connection_string()
+        return DatabaseConfiguration(os.environ).connection_string()
