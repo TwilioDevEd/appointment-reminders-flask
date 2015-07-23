@@ -12,7 +12,7 @@ class Route(object):
         self.resource = resource
 
 handlers = [
-    Route('/appointment', 'appointment', views.appointment.AppointmentResource),
+    Route('/appointment', 'appointment.index', views.appointment.AppointmentResource),
     Route('/appointment/new', 'appointment.new', views.appointment.AppointmentFormResource)
 ]
 

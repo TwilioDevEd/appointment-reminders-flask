@@ -3,12 +3,22 @@ from flask import render_template
 from models.appointment import Appointment
 from sqlalchemy import select
 from forms.new_appointment import NewAppointmentForm
+from flask import request, flash, redirect, url_for
 import os
 import datetime
 
 class AppointmentResource(MethodView):
     def __init__(self, db):
         self.db = db
+
+    def post(self):
+        form = NewAppointmentForm(request.form)
+
+        if form.validate():
+            pass
+        else:
+            flash(form.errors)
+            return redirect(url_for('appointment.new'), code=303)
 
     def get(self):
         all_appointments = self.db.session.query(Appointment).all()
@@ -19,5 +29,5 @@ class AppointmentFormResource(MethodView):
         self.db = db
 
     def get(self):
-        form = NewAppointmentForm(secret_key=os.environ.get('SECRET_KEY'))
+        form = NewAppointmentForm()
         return render_template('appointments/new.html', form=form)

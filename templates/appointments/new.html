@@ -4,7 +4,8 @@
 {% block header %}New appointment{% endblock %}
 
 {% block content %}
-  <form method="post" action=""{{ url_for('appointment') }}"">
+  <form method="post" class="col-lg-6" action="{{ url_for('appointment.index') }}">
+    {{ form.csrf_token }}
     <div class="form-group">
       <div class="form-group">
         <label for="name">{{ form.name.label }}</label>
