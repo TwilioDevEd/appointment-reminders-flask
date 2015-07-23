@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}All appointments{% endblock %}
+{% block header %}All appointments{% endblock %}
+
+{% block content %}
+
+  <table class="table">
+    <thead>
+      <th>Name</th>
+      <th>Phone number</th>
+      <th>Appointment time</th>
+      <th>Reminder time</th>
+      <th>Timezone</th>
+    </thead>
+    <tbody>
+      {% for appointment in appointments  %}
+        <tr>
+          <td>{{ appointment.name }}</td>
+          <td>{{ appointment.phone_number }}</td>
+          <td>{{ appointment.time }}</td>
+          <td>{{ appointment.delta }}</td>
+          <td>{{ appointment.timezone }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}

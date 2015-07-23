@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}New appointment{% endblock %}
+{% block header %}New appointment{% endblock %}
+
+{% block content %}
+  <form method="post" action=""{{ url_for('appointment') }}"">
+    <div class="form-group">
+      <div class="form-group">
+        <label for="name">{{ form.name.label }}</label>
+         {{ form.name(class="form-control") }}
+      </div>
+      <div class="form-group">
+        <label for="phone_number">{{ form.phone_number.label }}</label>
+         {{ form.phone_number(class="form-control") }}
+      </div>
+      <div class="form-group">
+        <label for="phone_number">{{ form.delta.label }}</label>
+         {{ form.delta(class="form-control") }}
+      </div>
+      <div class="form-group">
+        <label for="time">{{ form.time.label }}</label>
+         {{ form.time(class="form-control") }}
+      </div>
+      <button type="submit" class="btn btn-default">Create</button>
+    </div>
+  </form>
+{% endblock %}

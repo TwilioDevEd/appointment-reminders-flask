@@ -9,6 +9,7 @@ from sqlalchemy import create_engine, pool
 from logging.config import fileConfig
 from config.database import DatabaseConfiguration
 import dotenv
+import os
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -30,7 +31,7 @@ target_metadata = None
 # ... etc.
 
 def connection_url_from_env():
-    db_config = DatabaseConfiguration()
+    db_config = DatabaseConfiguration(os.environ)
     return db_config.connection_string()
 
 def run_migrations_offline():
