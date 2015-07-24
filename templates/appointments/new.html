@@ -8,6 +8,7 @@
   <form method="post" class="form-horizontal col-lg-5" action="{{ url_for('appointment.index') }}">
     {{ form.csrf_token }}
     <div class="form-group">
+      <input type="hidden" name="_method" value="POST">
       {{ render_field(form.name) }}
       {{ render_field(form.phone_number) }}
       {{ render_field(form.delta) }}

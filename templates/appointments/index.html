@@ -12,6 +12,7 @@
       <th>Appointment time</th>
       <th>Reminder time</th>
       <th>Timezone</th>
+      <th>Actions</th>
     </thead>
     <tbody>
       {% for appointment in appointments  %}
@@ -21,6 +22,12 @@
           <td>{{ appointment.time }}</td>
           <td>{{ appointment.delta }}</td>
           <td>{{ appointment.timezone }}</td>
+          <td>
+            <form method="POST" action="{{url_for('appointment.delete', id=appointment.id) }} ">
+              <input type="hidden" name="_method" value="DELETE">
+              <button type="submit" class="btn btn-danger btn-xs">Delete</button>
+            </form>
+          </td>
         </tr>
       {% endfor %}
     </tbody>

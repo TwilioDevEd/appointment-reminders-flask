@@ -20,6 +20,13 @@ class AppointmentResource(MethodView):
         else:
             return render_template('appointments/new.html', form=form), 400
 
+    def delete(self, id):
+        appt = self.db.session.query(Appointment).filter_by(id=id).one()
+        self.db.session.delete(appt)
+        self.db.session.commit()
+
+        return redirect(url_for('appointment.index'), code=303)
+
     def get(self):
         all_appointments = self.db.session.query(Appointment).all()
         return render_template('appointments/index.html', appointments=all_appointments)

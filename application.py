@@ -12,6 +12,7 @@ class Route(object):
 
 handlers = [
     Route('/appointment', 'appointment.index', views.appointment.AppointmentResource),
+    Route('/appointment/<int:id>/', 'appointment.delete', views.appointment.AppointmentResource),
     Route('/appointment/new', 'appointment.new', views.appointment.AppointmentFormResource)
 ]
 
