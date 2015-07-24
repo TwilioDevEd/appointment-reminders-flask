@@ -18,12 +18,16 @@
     </div>
   </form>
 {% endblock %}
-{% block head %}
+{% block scripts %}
   {{ super() }}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.14.30/js/bootstrap-datetimepicker.min.js"></script>
+  <script src="{{ url_for('static', filename='js/datetime-picker.js') }}"></script>
+{% endblock %}
+
+{% block head %}
+  {{ super() }}
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.14.30/css/bootstrap-datetimepicker.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.min.css">
-  <script src="{{ url_for('static', filename='js/datetime-picker.js') }}"></script>
 {% endblock %}

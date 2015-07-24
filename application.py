@@ -1,5 +1,4 @@
 import flask
-import dotenv
 import flask.ext.sqlalchemy
 import views.appointment
 import os

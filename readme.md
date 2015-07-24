@@ -1,4 +1,4 @@
-# Appointment reminders with Flask
+# Twilio's Appointment Reminders with Flask
 
 It is recommended to use a [virtualenv](https://virtualenv.pypa.io/en/latest/)
 together with

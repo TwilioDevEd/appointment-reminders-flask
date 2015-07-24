@@ -1,11 +1,8 @@
 from flask.views import MethodView
 from flask import render_template
 from models.appointment import Appointment
-from sqlalchemy import select
 from forms.new_appointment import NewAppointmentForm
 from flask import request, flash, redirect, url_for
-import os
-import datetime
 
 class AppointmentResource(MethodView):
     def __init__(self, db):
