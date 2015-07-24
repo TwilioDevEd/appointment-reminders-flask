@@ -1,12 +1,12 @@
 from flask_wtf import Form
-from wtforms import StringField, DateTimeField, IntegerField, HiddenField, SelectField
+from wtforms import StringField, DateTimeField, SelectField
 from wtforms.validators import DataRequired, Length
 from pytz import common_timezones
 
 def _timezones():
     return [(tz, tz) for tz in common_timezones][::-1]
 
-appointment_times =[(t, str(t) + " minutes") for t in [15, 30, 45, 60]]
+appointment_times =[(t, t + " minutes") for t in ['15', '30', '45' , '60']]
 
 class NewAppointmentForm(Form):
     name = StringField('Name', validators=[DataRequired()])

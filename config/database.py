@@ -15,7 +15,7 @@ class DatabaseConfiguration(object):
             'db_user': self.env.get('DB_USER'),
             'db_password': self.env.get('DB_PASSWORD')
         }
-        if any(config_value == None for config_value in config.values()):
+        if any(config_value is None for config_value in config.values()):
             message = 'Database not configured. Refer to .env.example'
             raise DatabaseNotConfiguredException(message)
         else:

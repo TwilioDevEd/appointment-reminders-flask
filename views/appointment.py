@@ -3,7 +3,7 @@ from flask import render_template
 from models.appointment import Appointment
 from sqlalchemy import select
 from forms.new_appointment import NewAppointmentForm
-from flask import request, flash, redirect
+from flask import request, flash, redirect, url_for
 import os
 import datetime
 
@@ -18,6 +18,8 @@ class AppointmentResource(MethodView):
             appt = Appointment(**form.data)
             self.db.session.add(appt)
             self.db.session.commit()
+
+            return redirect(url_for('appointment.index'), code=303)
         else:
             return render_template('appointments/new.html', form=form), 400
 
