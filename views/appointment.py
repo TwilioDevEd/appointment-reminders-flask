@@ -9,6 +9,7 @@ class AppointmentResource(MethodView):
         self.db = db
 
     def post(self):
+        print("We get to here")
         form = NewAppointmentForm(request.form)
 
         if form.validate():

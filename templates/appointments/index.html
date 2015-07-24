@@ -23,7 +23,7 @@
           <td>{{ appointment.delta }}</td>
           <td>{{ appointment.timezone }}</td>
           <td>
-            <form method="POST" action="{{url_for('appointment.delete', id=appointment.id) }} ">
+            <form method="POST" action="{{url_for('appointment.delete', id=appointment.id) }}">
               <input type="hidden" name="_method" value="DELETE">
               <button type="submit" class="btn btn-danger btn-xs">Delete</button>
             </form>
