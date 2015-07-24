@@ -3,28 +3,27 @@
 {% block title %}New appointment{% endblock %}
 {% block header %}New appointment{% endblock %}
 
+{% from "common/_fields.html" import render_field %}
 {% block content %}
-  <form method="post" class="col-lg-4" action="{{ url_for('appointment.index') }}">
+  <form method="post" class="form-horizontal col-lg-5" action="{{ url_for('appointment.index') }}">
     {{ form.csrf_token }}
     <div class="form-group">
-      <div class="form-group">
-        <label for="name">{{ form.name.label }}</label>
-         {{ form.name(class="form-control") }}
-      </div>
-      <div class="form-group">
-        <label for="phone_number">{{ form.phone_number.label }}</label>
-         {{ form.phone_number(class="form-control") }}
-      </div>
-      <div class="form-group">
-        <label for="phone_number">{{ form.delta.label }}</label>
-         {{ form.delta(class="form-control") }}
-      </div>
-      <div class="form-group">
-        <label for="time">{{ form.time.label }}</label>
-         {{ form.time(class="form-control") }}
-      </div>
+      {{ render_field(form.name) }}
+      {{ render_field(form.phone_number) }}
+      {{ render_field(form.delta) }}
+      {{ render_field(form.time, id="time") }}
+      {{ render_field(form.timezone, id="timezone-field") }}
+
       <button type="submit" class="btn btn-default">Create</button>
     </div>
-    {% endwith %}
   </form>
+{% endblock %}
+{% block head %}
+  {{ super() }}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.14.30/js/bootstrap-datetimepicker.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.14.30/css/bootstrap-datetimepicker.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.min.css">
+  <script src="{{ url_for('static', filename='js/datetime-picker.js') }}"></script>
 {% endblock %}
