@@ -1,5 +1,6 @@
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, DateTime, String
+import arrow
 
 Base = declarative_base()
 
@@ -22,3 +23,9 @@ class Appointment(Base):
 
     def __repr__(self):
         return '<Appointment %r>' % self.name
+
+    def notification_time(self):
+        appointment_time = arrow.get(self.time)
+        time_now = arrow.utcnow()
+        reminder_time = appointment_time.replace(minutes=-self.delta)
+        return reminder_time
