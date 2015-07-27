@@ -20,14 +20,14 @@ class AppointmentResourceCreateIndex(MethodView):
         form = NewAppointmentForm(request.form)
 
         if form.validate():
-            import tasks
+            from tasks import send_sms_reminder
 
             appt = Appointment(**form.data)
             appt.time = arrow.get(appt.time, appt.timezone).to('utc').naive
 
             reminders.db.session.add(appt)
             reminders.db.session.commit()
-            tasks.send_sms_reminder.apply_async(eta=appt.notification_time())
+            send_sms_reminder.apply_async(args=[appt.id], eta=appt.notification_time())
 
             return redirect(url_for('appointment.index'), code=303)
         else:
