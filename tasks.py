@@ -10,7 +10,6 @@ twilio_auth_token = app.flask_app.config['TWILIO_AUTH_TOKEN']
 twilio_number = app.flask_app.config['TWILIO_NUMBER']
 
 client = TwilioRestClient(account=twilio_account_sid, token=twilio_auth_token)
-logger = get_task_logger(__name__)
 
 @celery.task()
 def send_sms_reminder(appointment_id):
