@@ -1,0 +1,6 @@
+{
+    "title": "Appointment reminders",
+    "repo": "TwilioDevEd/appointment-reminders-flask",
+    "description": "Learn to implement appointment reminders functionality with Python and Flask",
+    "heroku": true
+}
