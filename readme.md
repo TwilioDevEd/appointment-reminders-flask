@@ -41,3 +41,11 @@ The application can be run with:
 ```
 python runapp.py
 ```
+
+## Run the tests
+Customize `.env.test` to your needs, use alembic to migrate the test
+database (make sure you have the right `DATABASE_URI` set) and then use pytest to run the tests:
+
+```
+py.test
+```

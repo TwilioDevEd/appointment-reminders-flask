@@ -69,8 +69,6 @@ def run_migrations_online():
         with context.begin_transaction():
             context.run_migrations()
 
-dotenv.load_dotenv('.env')
-
 if context.is_offline_mode():
     run_migrations_offline()
 else:
