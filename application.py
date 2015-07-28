@@ -1,6 +1,5 @@
 import flask
 import flask.ext.sqlalchemy
-import os
 from config.database import DatabaseConfiguration
 from celery import Celery
 from views.appointment import AppointmentResourceDelete, AppointmentResourceCreateIndex, AppointmentFormResource
@@ -18,20 +17,12 @@ handlers = [
 ]
 
 class Application(object):
-    def __init__(self, routes):
+    def __init__(self, routes, config, debug=True):
         self.flask_app = flask.Flask(__name__)
         self.routes = routes
-        self.configure_app(os.environ)
-
-    def configure_app(self, env):
-        self.flask_app.config['SQLALCHEMY_DATABASE_URI'] = env.get('DATABASE_URI')
-        self.flask_app.config['CELERY_BROKER_URL'] = env.get('CELERY_URI')
-        self.flask_app.config['CELERY_RESULT_BACKEND'] = env.get('CELERY_URI')
-        self.flask_app.config['TWILIO_ACCOUNT_SID'] = env.get('TWILIO_ACCOUNT_SID')
-        self.flask_app.config['TWILIO_AUTH_TOKEN'] = env.get('TWILIO_AUTH_TOKEN')
-        self.flask_app.config['TWILIO_NUMBER'] = env.get('TWILIO_NUMBER')
-        self.flask_app.secret_key = env.get('SECRET_KEY')
-        self.db = flask.ext.sqlalchemy.SQLAlchemy(self.flask_app)
+        self.debug = debug
+        self._configure_app(config)
+        self._set_routes()
 
     def celery(self):
         app = self.flask_app
@@ -48,8 +39,20 @@ class Application(object):
 
         return celery
 
-    def start_app(self):
+    def _set_routes(self):
         for route in self.routes:
             app_view = route.resource.as_view(route.route_name)
             self.flask_app.add_url_rule(route.url, view_func=app_view)
-        self.flask_app.run(debug=True)
+
+    def _configure_app(self, env):
+        self.flask_app.config['SQLALCHEMY_DATABASE_URI'] = env.get('DATABASE_URI')
+        self.flask_app.config['CELERY_BROKER_URL'] = env.get('CELERY_URI')
+        self.flask_app.config['CELERY_RESULT_BACKEND'] = env.get('CELERY_URI')
+        self.flask_app.config['TWILIO_ACCOUNT_SID'] = env.get('TWILIO_ACCOUNT_SID')
+        self.flask_app.config['TWILIO_AUTH_TOKEN'] = env.get('TWILIO_AUTH_TOKEN')
+        self.flask_app.config['TWILIO_NUMBER'] = env.get('TWILIO_NUMBER')
+        self.flask_app.secret_key = env.get('SECRET_KEY')
+        self.db = flask.ext.sqlalchemy.SQLAlchemy(self.flask_app)
+
+    def start_app(self):
+        self.flask_app.run(debug=self.debug)
