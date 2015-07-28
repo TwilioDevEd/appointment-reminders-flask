@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}All appointments{% endblock %}
+{% block header %}All appointments{% endblock %}
+
+{% block content %}
+  {% if appointments %}
+  <table class="table">
+    <thead>
+      <th>Name</th>
+      <th>Phone number</th>
+      <th>Appointment time</th>
+      <th>Reminder time</th>
+      <th>Timezone</th>
+      <th>Actions</th>
+    </thead>
+    <tbody>
+      {% for appointment in appointments  %}
+        <tr>
+          <td>{{ appointment.name }}</td>
+          <td>{{ appointment.phone_number }}</td>
+          <td>{{ appointment.time }}</td>
+          <td>{{ appointment.delta }}</td>
+          <td>{{ appointment.timezone }}</td>
+          <td>
+            <form method="POST" action="{{url_for('appointment.delete', id=appointment.id) }}">
+              <button type="submit" class="btn btn-danger btn-xs">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+    <div class="well">
+      There are no appointment reminders scheduled.
+    </div>
+  {% endif %}
+
+{% endblock %}

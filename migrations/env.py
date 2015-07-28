@@ -1,9 +1,13 @@
 from __future__ import with_statement
+import sys
+import os
+
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+
 from alembic import context
 from sqlalchemy import create_engine, pool
 from logging.config import fileConfig
 import dotenv
-import os
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -25,14 +29,7 @@ target_metadata = None
 # ... etc.
 
 def connection_url_from_env():
-    db_config = {
-        'db_name': os.environ.get('DB_NAME'),
-        'db_host': os.environ.get('DB_HOST'),
-        'db_user': os.environ.get('DB_USER'),
-        'db_password': os.environ.get('DB_PASSWORD')
-    }
-
-    return "postgresql://{db_user}:{db_password}@{db_host}/{db_name}".format(**db_config)
+    return os.environ.get('DATABASE_URI')
 
 def run_migrations_offline():
     """Run migrations in 'offline' mode.
@@ -71,8 +68,6 @@ def run_migrations_online():
 
         with context.begin_transaction():
             context.run_migrations()
-
-dotenv.load_dotenv('.env')
 
 if context.is_offline_mode():
     run_migrations_offline()
