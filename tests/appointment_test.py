@@ -52,7 +52,3 @@ class appointments_test(unittest.TestCase):
         all_appts = self.db.session.query(Appointment).all()
 
         self.assertEqual(all_appts, [])
-
-
-if __name__ == '__main__':
-    unittest.main()
