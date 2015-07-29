@@ -31,7 +31,7 @@ alembic upgrade +1
 ```
 ## Start the celery worker
 First you'll need to have a backend running. In this case we're going
-to use [Redis.](http://redis.io/). Simply execute `redis-server` to
+to use [Redis](http://redis.io/). Simply execute `redis-server` to
 run the server.
 
 To start the celery worker we need to point out the module that exports
@@ -48,8 +48,9 @@ python runapp.py
 ```
 If all environment variables specified in `env.example` are set
 correctly then the application is now ready to send SMS
-reminders. Open [http://localhost:5000/appointment/new] to create a
-new appointment.
+reminders. Open
+[http://localhost:5000/appointment/new](http://localhost:5000/appointment/new)
+to create a new appointment.
 
 ## Run the tests
 Assuming you have configured the application for your local test
