@@ -18,7 +18,7 @@
     "TWILIO_AUTH_TOKEN": {
       "description": "API password - find your auth token at https://www.twilio.com/user/account/voice-messaging"
     },
-    "TWILIO_SENDING_NUMBER": {
+    "TWILIO_NUMBER": {
       "description": "A number in your Twilio account to use with this application in E.164 format (e.g. +16518675309) - view your numbers at https://www.twilio.com/user/account/phone-numbers/incoming"
     },
     "SECRET_KEY": {
