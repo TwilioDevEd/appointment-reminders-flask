@@ -53,16 +53,24 @@ class Application(object):
             self.flask_app.add_url_rule(route.url, view_func=app_view)
 
     def _configure_app(self, env):
+        celery_url = env.get('CELERY_URL')
+
         self.flask_app.config[
-            'SQLALCHEMY_DATABASE_URI'] = env.get('DATABASE_URI')
-        self.flask_app.config['CELERY_BROKER_URL'] = env.get('CELERY_URI')
-        self.flask_app.config['CELERY_RESULT_BACKEND'] = env.get('CELERY_URI')
+            'SQLALCHEMY_DATABASE_URI'] = env.get('DATABASE_URL')
+
+        self.flask_app.config['CELERY_BROKER_URL'] = env.get(
+            'REDISTOGO_URL', celery_url)
+        self.flask_app.config['CELERY_RESULT_BACKEND'] = env.get(
+            'REDISTOGO_URL', celery_url)
+
         self.flask_app.config['TWILIO_ACCOUNT_SID'] = env.get(
             'TWILIO_ACCOUNT_SID')
         self.flask_app.config['TWILIO_AUTH_TOKEN'] = env.get(
             'TWILIO_AUTH_TOKEN')
         self.flask_app.config['TWILIO_NUMBER'] = env.get('TWILIO_NUMBER')
+
         self.flask_app.secret_key = env.get('SECRET_KEY')
+
         self.db = flask.ext.sqlalchemy.SQLAlchemy(self.flask_app)
 
     def start_app(self):
