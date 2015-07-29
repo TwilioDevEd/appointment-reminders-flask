@@ -1,11 +1,9 @@
 import unittest
-import dotenv
 import os
 from models.appointment import Appointment
 
 class appointments_test(unittest.TestCase):
     def setUp(self):
-        dotenv.load_dotenv(os.path.join(os.path.dirname(__file__), '.env.test'))
         from reminders import app, db
         app.flask_app.config['WTF_CSRF_ENABLED'] = False
         self.db = db

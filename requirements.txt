@@ -24,7 +24,6 @@ PySocks==1.5.4
 pytest==2.7.2
 pytest-pythonpath==0.7
 python-dateutil==2.4.2
-python-dotenv==0.1.2
 pytz==2015.4
 redis==2.10.3
 six==1.9.0
