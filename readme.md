@@ -1,5 +1,16 @@
 # Twilio's Appointment Reminders with Flask
 
+[![Build Status](https://travis-ci.org/TwilioDevEd/appointment-reminders-flask.svg?branch=master)](https://travis-ci.org/TwilioDevEd/appointment-reminders-flask)
+
+## Deploy to Heroku
+
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
+After deploying make sure the worker is enabled under the application
+dashboard. Otherwise the app won't be able to send SMS.
+
+## Installing dependencies
+
 It is recommended to use a [virtualenv](https://virtualenv.pypa.io/en/latest/)
 together with
 [virtualenvwrapper](https://virtualenvwrapper.readthedocs.org/en/latest/) to
@@ -55,7 +66,7 @@ to create a new appointment.
 ## Run the tests
 Assuming you have configured the application for your local test
 environment, you can then use Alembic to migrate the test database
-(by setting the correct `DATABASE_URI`) and then use pytest
+(by setting the correct `DATABASE_URL`) and then use pytest
 to run the tests:
 ```
 py.test

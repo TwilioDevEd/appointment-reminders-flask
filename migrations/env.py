@@ -28,7 +28,7 @@ target_metadata = None
 
 
 def connection_url_from_env():
-    return os.environ.get('DATABASE_URI')
+    return os.environ.get('DATABASE_URL')
 
 
 def run_migrations_offline():

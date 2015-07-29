@@ -11,6 +11,7 @@ Flask-DebugToolbar==0.8.0
 Flask-SQLAlchemy==2.0
 Flask-WTF==0.12
 gnureadline==6.3.3
+gunicorn==19.3
 httplib2==0.9.1
 itsdangerous==0.24
 Jinja2==2.7
