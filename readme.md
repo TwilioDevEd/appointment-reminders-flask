@@ -1,8 +1,13 @@
 # Twilio's Appointment Reminders with Flask
 
+[![Build Status](https://travis-ci.org/TwilioDevEd/appointment-reminders-flask.svg?branch=master)](https://travis-ci.org/TwilioDevEd/appointment-reminders-flask)
+
 ## Deploy to Heroku
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
+After deploying make sure the worker is enabled under the application
+dashboard. Otherwise the app won't be able to send SMS.
 
 ## Installing dependencies
 
