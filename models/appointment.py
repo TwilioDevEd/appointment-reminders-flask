@@ -4,6 +4,7 @@ import arrow
 
 Base = declarative_base()
 
+
 class Appointment(Base):
     __tablename__ = 'appointments'
 
@@ -26,6 +27,5 @@ class Appointment(Base):
 
     def notification_time(self):
         appointment_time = arrow.get(self.time)
-        time_now = arrow.utcnow()
         reminder_time = appointment_time.replace(minutes=-self.delta)
         return reminder_time

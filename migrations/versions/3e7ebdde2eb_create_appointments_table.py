@@ -1,7 +1,7 @@
 """create appointments table
 
 Revision ID: 3e7ebdde2eb
-Revises: 
+Revises:
 Create Date: 2015-07-20 17:47:37.704508
 
 """

@@ -2,7 +2,6 @@ from reminders import celery, db, app
 from models.appointment import Appointment
 from sqlalchemy.orm.exc import NoResultFound
 from twilio.rest import TwilioRestClient
-from celery.utils.log import get_task_logger
 import arrow
 
 twilio_account_sid = app.flask_app.config['TWILIO_ACCOUNT_SID']
@@ -11,10 +10,12 @@ twilio_number = app.flask_app.config['TWILIO_NUMBER']
 
 client = TwilioRestClient(account=twilio_account_sid, token=twilio_auth_token)
 
+
 @celery.task()
 def send_sms_reminder(appointment_id):
     try:
-        appointment = db.session.query(Appointment).filter_by(id=appointment_id).one()
+        appointment = db.session.query(
+            Appointment).filter_by(id=appointment_id).one()
     except NoResultFound:
         return
 
@@ -24,8 +25,8 @@ def send_sms_reminder(appointment_id):
         time.format('h:mm a')
     )
 
-    message = client.messages.create(
-                body=body,
-                to=appointment.phone_number,
-                from_=twilio_number,
+    client.messages.create(
+        body=body,
+        to=appointment.phone_number,
+        from_=twilio_number,
     )
