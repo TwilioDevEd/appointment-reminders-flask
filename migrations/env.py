@@ -26,8 +26,10 @@ target_metadata = None
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
 
+
 def connection_url_from_env():
     return os.environ.get('DATABASE_URI')
+
 
 def run_migrations_offline():
     """Run migrations in 'offline' mode.
@@ -56,7 +58,8 @@ def run_migrations_online():
     and associate a connection with the context.
 
     """
-    connectable = create_engine(connection_url_from_env(), poolclass=pool.NullPool)
+    connectable = create_engine(connection_url_from_env(),
+                                poolclass=pool.NullPool)
 
     with connectable.connect() as connection:
         context.configure(

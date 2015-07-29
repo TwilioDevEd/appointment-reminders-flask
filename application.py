@@ -1,10 +1,12 @@
 import flask
 import flask.ext.sqlalchemy
-from config.database import DatabaseConfiguration
 from celery import Celery
-from views.appointment import AppointmentResourceDelete, AppointmentResourceCreateIndex, AppointmentFormResource
+from views.appointment import AppointmentResourceDelete, AppointmentFormResource
+from views.appointment import AppointmentResourceCreateIndex
+
 
 class Route(object):
+
     def __init__(self, url, route_name, resource):
         self.url = url
         self.route_name = route_name
@@ -12,11 +14,14 @@ class Route(object):
 
 handlers = [
     Route('/appointment', 'appointment.index', AppointmentResourceCreateIndex),
-    Route('/appointment/<int:id>/delete', 'appointment.delete', AppointmentResourceDelete),
+    Route('/appointment/<int:id>/delete',
+          'appointment.delete', AppointmentResourceDelete),
     Route('/appointment/new', 'appointment.new', AppointmentFormResource),
 ]
 
+
 class Application(object):
+
     def __init__(self, routes, config, debug=True):
         self.flask_app = flask.Flask(__name__)
         self.routes = routes
@@ -26,12 +31,15 @@ class Application(object):
 
     def celery(self):
         app = self.flask_app
-        celery = Celery(app.import_name, broker=app.config['CELERY_BROKER_URL'])
+        celery = Celery(app.import_name, broker=app.config[
+                        'CELERY_BROKER_URL'])
         celery.conf.update(app.config)
 
         TaskBase = celery.Task
+
         class ContextTask(TaskBase):
             abstract = True
+
             def __call__(self, *args, **kwargs):
                 with app.app_context():
                     return TaskBase.__call__(self, *args, **kwargs)
@@ -45,11 +53,14 @@ class Application(object):
             self.flask_app.add_url_rule(route.url, view_func=app_view)
 
     def _configure_app(self, env):
-        self.flask_app.config['SQLALCHEMY_DATABASE_URI'] = env.get('DATABASE_URI')
+        self.flask_app.config[
+            'SQLALCHEMY_DATABASE_URI'] = env.get('DATABASE_URI')
         self.flask_app.config['CELERY_BROKER_URL'] = env.get('CELERY_URI')
         self.flask_app.config['CELERY_RESULT_BACKEND'] = env.get('CELERY_URI')
-        self.flask_app.config['TWILIO_ACCOUNT_SID'] = env.get('TWILIO_ACCOUNT_SID')
-        self.flask_app.config['TWILIO_AUTH_TOKEN'] = env.get('TWILIO_AUTH_TOKEN')
+        self.flask_app.config['TWILIO_ACCOUNT_SID'] = env.get(
+            'TWILIO_ACCOUNT_SID')
+        self.flask_app.config['TWILIO_AUTH_TOKEN'] = env.get(
+            'TWILIO_AUTH_TOKEN')
         self.flask_app.config['TWILIO_NUMBER'] = env.get('TWILIO_NUMBER')
         self.flask_app.secret_key = env.get('SECRET_KEY')
         self.db = flask.ext.sqlalchemy.SQLAlchemy(self.flask_app)

@@ -1,6 +1,6 @@
 import unittest
-import os
 from models.appointment import Appointment
+
 
 class appointments_test(unittest.TestCase):
     def setUp(self):
