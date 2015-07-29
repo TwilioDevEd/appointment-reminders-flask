@@ -6,10 +6,9 @@
       The application allows users to schedule appointment reminders
       for customers. The user add a name, a time, a notification time
       and phone number and the application will send the customer a
-      reminder using [Twilio\'s
-      API](https://www.twilio.com/docs/python/install). The application uses
+      reminder using [Twilio's API](https://www.twilio.com/docs/python/install). The application uses
       [Flask](http://flask.pocoo.org/) as the underlying web
-      framework and [Celery](http://www.celeryproject.org/) as the task scheduler
+      framework and [Celery](http://www.celeryproject.org/) as the task scheduler.
 
       Head to the app's [readme
       file](https://github.com/TwilioDevEd/appointment-reminders-flask/blob/master/readme.md)
@@ -23,9 +22,8 @@
       * [Arrow time library](http://crsmithdev.com/arrow/)
       * [Alembic migrations](https://bitbucket.org/zzzeek/alembic)
       * [pytest to run the tests](http://pytest.org/latest/)
-      * [Dotenv for configuration](https://github.com/theskumar/python-dotenv)
 
-  .step(data-file='application.py', data-highlight='19-58')
+  .step(data-file='application.py', data-highlight='23-69')
     :markdown
       ## The application structure
 
@@ -34,12 +32,11 @@
       used in the rest of the app. The app is configured used
       environment variables. The required variables can be found in `.env.example`
 
-      ## Setting environment variables using `dotenv`
+      ## Setting environment variables
 
-      Optionally, you can create a `.env` file containing the
-      environment variables so you don't have to set them manually.
+      You can either export each of the variables or use autoenv to load them as you cd into the repository.
 
-  .step(data-file='application.py', data-highlight='51-53')
+  .step(data-file='application.py', data-highlight='60-64')
     :markdown
       ## Configuring the application
 
@@ -47,8 +44,7 @@
 
       To send messages using Twilio's API you will need a Twilio
       Account SID and a Twilio token. You can find all of these in
-      your [Twilio
-      dashboard](https://www.twilio.com/user/account/voice)]. You will
+      your [Twilio dashboard](https://www.twilio.com/user/account/voice). You will
       also need to configure a Twilio sending number that you can
       get/purchase in [the number management
       page](https://www.twilio.com/user/account/phone-numbers/incoming). The
@@ -63,7 +59,7 @@
       (in this case Redis) and a secret key Flask will use to encrypt
       cookies.
 
-  .step(data-file='views/appointment.py', data-highlight='19-34')
+  .step(data-file='views/appointment.py', data-highlight='22-38')
     :markdown
       ## Scheduling appointment reminders
 
@@ -114,7 +110,7 @@
       the appointment has been deleted and therefore we don't need to
       do anything.
 
-  .step(data-file='tasks.py', data-highlight='27-31')
+  .step(data-file='tasks.py', data-highlight='28-32')
     :markdown
       ## Sending SMS using the API
 
