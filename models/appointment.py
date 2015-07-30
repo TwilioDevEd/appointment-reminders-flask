@@ -25,7 +25,7 @@ class Appointment(Base):
     def __repr__(self):
         return '<Appointment %r>' % self.name
 
-    def notification_time(self):
+    def get_notification_time(self):
         appointment_time = arrow.get(self.time)
         reminder_time = appointment_time.replace(minutes=-self.delta)
         return reminder_time
