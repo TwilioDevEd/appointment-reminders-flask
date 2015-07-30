@@ -5,7 +5,7 @@
 
 {% from "common/_fields.html" import render_field %}
 {% block content %}
-  <form method="post" class="form-horizontal col-lg-5" action="{{ url_for('appointment.new') }}">
+  <form method="post" class="form-horizontal col-lg-5" action="{{ url_for('appointment.create') }}">
     {{ form.csrf_token }}
     <div class="form-group">
       {{ render_field(form.name) }}
