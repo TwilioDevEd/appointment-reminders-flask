@@ -1,19 +1,8 @@
-import unittest
+from base_test import BaseTest
 from models.appointment import Appointment
 
 
-class appointments_test(unittest.TestCase):
-    def setUp(self):
-        from reminders import app, db
-        app.flask_app.config['WTF_CSRF_ENABLED'] = False
-        self.db = db
-        self.celery = app.celery()
-        self.test_client = app.flask_app.test_client()
-
-    def tearDown(self):
-        self.db.session.query(Appointment).delete()
-        self.db.session.commit()
-        self.celery.control.purge()
+class AppointmentTest(BaseTest):
 
     def test_index(self):
         response = self.test_client.get('/')
