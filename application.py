@@ -59,9 +59,9 @@ class Application(object):
             'SQLALCHEMY_DATABASE_URI'] = env.get('DATABASE_URL')
 
         self.flask_app.config['CELERY_BROKER_URL'] = env.get(
-            'REDISTOGO_URL', celery_url)
+            'REDIS_URL', celery_url)
         self.flask_app.config['CELERY_RESULT_BACKEND'] = env.get(
-            'REDISTOGO_URL', celery_url)
+            'REDIS_URL', celery_url)
 
         self.flask_app.config['TWILIO_ACCOUNT_SID'] = env.get(
             'TWILIO_ACCOUNT_SID')
