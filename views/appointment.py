@@ -31,7 +31,7 @@ class AppointmentResourceCreateIndex(MethodView):
             reminders.db.session.add(appt)
             reminders.db.session.commit()
             send_sms_reminder.apply_async(
-                args=[appt.id], eta=appt.notification_time())
+                args=[appt.id], eta=appt.get_notification_time())
 
             return redirect(url_for('appointment.index'), code=303)
         else:
