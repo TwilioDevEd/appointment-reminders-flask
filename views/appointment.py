@@ -17,7 +17,7 @@ class AppointmentResourceDelete(MethodView):
         return redirect(url_for('appointment.index'), code=303)
 
 
-class AppointmentResourceCreateIndex(MethodView):
+class AppointmentResourceCreate(MethodView):
 
     def post(self):
         form = NewAppointmentForm(request.form)
@@ -36,6 +36,9 @@ class AppointmentResourceCreateIndex(MethodView):
             return redirect(url_for('appointment.index'), code=303)
         else:
             return render_template('appointments/new.html', form=form), 400
+
+
+class AppointmentResourceIndex(MethodView):
 
     def get(self):
         all_appointments = reminders.db.session.query(Appointment).all()

@@ -16,7 +16,7 @@ class appointments_test(unittest.TestCase):
         self.celery.control.purge()
 
     def test_index(self):
-        response = self.test_client.get('/appointment')
+        response = self.test_client.get('/')
         assert b"There are no appointment reminders scheduled" in response.data
 
     def test_new_appointment(self):
@@ -29,7 +29,7 @@ class appointments_test(unittest.TestCase):
         }
         self.test_client.post('/appointment', data=params)
 
-        response = self.test_client.get('/appointment')
+        response = self.test_client.get('/')
         assert b"Mr Praline" in response.data
         assert b"+12025550170" in response.data
         assert b"2015-07-28 19:24:00" in response.data
