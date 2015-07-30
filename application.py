@@ -2,7 +2,7 @@ import flask
 import flask.ext.sqlalchemy
 from celery import Celery
 from views.appointment import AppointmentResourceDelete, AppointmentFormResource
-from views.appointment import AppointmentResourceCreateIndex
+from views.appointment import AppointmentResourceCreate, AppointmentResourceIndex
 
 
 class Route(object):
@@ -13,7 +13,8 @@ class Route(object):
         self.resource = resource
 
 handlers = [
-    Route('/appointment', 'appointment.index', AppointmentResourceCreateIndex),
+    Route('/', 'appointment.index', AppointmentResourceIndex),
+    Route('/appointment', 'appointment.create', AppointmentResourceCreate),
     Route('/appointment/<int:id>/delete',
           'appointment.delete', AppointmentResourceDelete),
     Route('/appointment/new', 'appointment.new', AppointmentFormResource),
@@ -59,9 +60,9 @@ class Application(object):
             'SQLALCHEMY_DATABASE_URI'] = env.get('DATABASE_URL')
 
         self.flask_app.config['CELERY_BROKER_URL'] = env.get(
-            'REDISTOGO_URL', celery_url)
+            'REDIS_URL', celery_url)
         self.flask_app.config['CELERY_RESULT_BACKEND'] = env.get(
-            'REDISTOGO_URL', celery_url)
+            'REDIS_URL', celery_url)
 
         self.flask_app.config['TWILIO_ACCOUNT_SID'] = env.get(
             'TWILIO_ACCOUNT_SID')

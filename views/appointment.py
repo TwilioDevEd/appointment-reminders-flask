@@ -17,7 +17,7 @@ class AppointmentResourceDelete(MethodView):
         return redirect(url_for('appointment.index'), code=303)
 
 
-class AppointmentResourceCreateIndex(MethodView):
+class AppointmentResourceCreate(MethodView):
 
     def post(self):
         form = NewAppointmentForm(request.form)
@@ -31,11 +31,14 @@ class AppointmentResourceCreateIndex(MethodView):
             reminders.db.session.add(appt)
             reminders.db.session.commit()
             send_sms_reminder.apply_async(
-                args=[appt.id], eta=appt.notification_time())
+                args=[appt.id], eta=appt.get_notification_time())
 
             return redirect(url_for('appointment.index'), code=303)
         else:
             return render_template('appointments/new.html', form=form), 400
+
+
+class AppointmentResourceIndex(MethodView):
 
     def get(self):
         all_appointments = reminders.db.session.query(Appointment).all()

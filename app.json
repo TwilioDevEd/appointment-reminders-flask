@@ -9,7 +9,7 @@
   "scripts": {
     "postdeploy": "alembic upgrade +1"
   },
-  "addons": ["heroku-postgresql:hobby-dev", "redistogo:nano"]
+  "addons": ["heroku-redis:hobby-dev", "heroku-postgresql:hobby-dev"]
   ,
   "env": {
     "TWILIO_ACCOUNT_SID": {
