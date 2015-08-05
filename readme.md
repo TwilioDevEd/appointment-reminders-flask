@@ -30,7 +30,7 @@ pip install -r requirements.txt
 ```
 ## Database migrations
 
-First, make sure [Postgres](http://www.postgresql.org/) is running on your system.
+First, make sure [Postgres](http://www.postgresql.org/) is running on your system. On the Mac, the easiest path is installing via [Homebrew](http://brew.sh/) (`brew install postgres`) to get all the required utilities set up where pip will look for them.
 
 You'll need to set the environment variables specified in `.env.example`
 to match your local configuration and `source` that file, or set the
