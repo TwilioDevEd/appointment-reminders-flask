@@ -2,75 +2,89 @@
 
 [![Build Status](https://travis-ci.org/TwilioDevEd/appointment-reminders-flask.svg?branch=master)](https://travis-ci.org/TwilioDevEd/appointment-reminders-flask)
 
-## Deploy to Heroku
+Use Twilio to send SMS reminders to your customers about upcoming appointments.
+Learn how appointment reminders help other companies in
+[these Twilio customer stories](https://www.twilio.com/use-cases/appointment-reminders).
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+## Quickstart
 
-After deploying make sure the worker is enabled under the application
-dashboard. Otherwise the app won't be able to send SMS.
+### Heroku
 
-## Installing dependencies
+The easiest way to run this app is by deploying it to [Heroku](https://www.heroku.com/). You can run this app for free in minutes:
 
-This app runs on Python 2.7, 3.3, and 3.4.
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/TwilioDevEd/appointment-reminders-flask)
 
-It is recommended to use a [virtualenv](https://virtualenv.pypa.io/en/latest/)
-together with
-[virtualenvwrapper](https://virtualenvwrapper.readthedocs.org/en/latest/) to
-manage the applications' dependencies. Assuming both are installed, the
-application can be run as follows:
+After your app deploys, **you must** go to the Heroku dashboard and enable your
+worker dyno to start the Celery worker.
 
-Create a virtualenv with virtualenvwrapper (using Python 3):
-```
-mkvirtualenv appointment-reminders-flask --python python3
-```
-Inside the cloned repo you can install the dependencies of the
-application using:
-```
-pip install -r requirements.txt
-```
-## Database migrations
+### Local development
 
-First, make sure [Postgres](http://www.postgresql.org/) is running on your system. On the Mac, the easiest path is installing via [Homebrew](http://brew.sh/) (`brew install postgres`) to get all the required utilities set up where pip will look for them.
+This project is built using the [Flask](http://flask.pocoo.org/) web framework. It runs on Python 2.7+ and Python 3.4+.
 
-You'll need to set the environment variables specified in `.env.example`
-to match your local configuration and `source` that file, or set the
-environment variables manually.
+To run the app locally, first clone this repository and `cd` into its directory. Then:
 
-The database schema is managed using [Alembic](https://github.com/zzzeek/alembic).
+1. Create a new virtual environment:
+    - If using vanilla [virtualenv](https://virtualenv.pypa.io/en/latest/):
 
-Migrate the database:
-```
-alembic upgrade +1
-```
-## Start the celery worker
-First you'll need to have a
-[message broker](http://celery.readthedocs.org/en/latest/getting-started/brokers/)
-running. In this case we're going to use [Redis](http://redis.io/). Once
-installed, simply execute `redis-server` to run the server.
+        ```
+        virtualenv venv
+        source venv/bin/activate
+        ```
 
-To start the celery worker we need to use the `celery`
-command with the module that exports the celery app object.
-```
-celery -A reminders.celery worker -l info
-```
-## Running the application
+    - If using [virtualenvwrapper](https://virtualenvwrapper.readthedocs.org/en/latest/):
 
-The application can be run with:
+        ```
+        mkvirtualenv appointment-reminders
+        ```
 
-```
-python runapp.py
-```
-If all environment variables specified in `.env.example` are set
-correctly then the application is now ready to send SMS
-reminders. Open
-[http://localhost:5000/appointment/new](http://localhost:5000/appointment/new)
-to create a new appointment.
+1. Install the requirements:
+
+    ```
+    pip install -r requirements.txt
+    ```
+
+1. Start a local PostgreSQL database and create a database called `appointments`:
+    - If on a Mac, we recommend [Postgres.app](http://postgresapp.com/). After install, open psql and run `CREATE DATABASE appointments;`
+    - If Postgres is already installed locally, you can just run `createdb appointments` from a terminal
+
+1. Copy the `.env_example` file to `.env`, and edit it to include your credentials for the Twilio API (found at https://www.twilio.com/user/account/voice) and your local Postgres database
+1. Run `source .env` to apply the environment variables (or even better, use [autoenv](https://github.com/kennethreitz/autoenv))
+
+1. Run the migrations with:
+
+    ```
+    alembic upgrade +1
+    ```
+
+1. Start a [redis](http://redis.io/) server to be our Celery broker. If on a Mac, we recommend installing redis through [homebrew](http://brew.sh/)
+
+1. Start the development server:
+
+    ```
+    python runapp.py
+    ```
+
+You can now access the application at [http://localhost:5000](http://localhost:5000). To send any reminders, however, you must also start a separate Celery worker process.
+
+1. Start a new terminal session, `cd` into the repository, and active your `appointment-reminders` virtualenv
+
+1. Start the Celery worker:
+
+    ```
+    celery -A reminders.celery worker -l info
+    ```
+
+Celery will now send SMS reminders for any new appointments you create through
+the web app.
 
 ## Run the tests
-Assuming you have configured the application for your local test
-environment, you can then use Alembic to migrate the test database
-(by setting the correct `DATABASE_URL`) and then use [pytest](http://pytest.org/)
-to run the tests:
+
+You can run the tests locally through [pytest](http://pytest.org/).
+
+Follow the instructions in the [Local Development](#local-development) section above, and then run:
+
 ```
 py.test --cov .
 ```
+
+You can then view the results with `coverage report` or build an HTML report with `coverage html`.
