@@ -1,147 +1,194 @@
-.chapter(data-title='The application structure')
-  .step(data-file='application.py', data-title='')
+.chapter(data-title='Appointment reminders with Twilio and Flask')
+  .step(data-file='tasks.py', data-highlight='11-32')
     :markdown
-      ## What does the application do?
+      ## What does this thing do?
 
-      The application allows users to schedule appointment reminders
-      for customers. The user add a name, a time, a notification time
-      and phone number and the application will send the customer a
-      reminder using [Twilio's API](https://www.twilio.com/docs/python/install). The application uses
-      [Flask](http://flask.pocoo.org/) as the underlying web
-      framework and [Celery](http://www.celeryproject.org/) as the task scheduler.
+      This web application shows how you can use Twilio to send your
+      customers a text message reminding them of upcoming appointments.
 
-      Head to the app's [readme
-      file](https://github.com/TwilioDevEd/appointment-reminders-flask/blob/master/readme.md)
-      to learn how to run the application in your own computer.
+      We use [Flask](http://flask.pocoo.org/) to build out the web application
+      that supports our user interface, and
+      [Celery](http://www.celeryproject.org/) to send the reminder text messages
+      to our customers at the right time.
+
+      In this tutorial, we'll point out the key bits of code that make this
+      application work. Check out the project
+      [README](https://github.com/TwilioDevEd/appointment-reminders-flask/blob/master/README.md)
+      on GitHub to see how to run the code yourself.
 
       ---
 
-      ### Other libraries used in this app
-      * [SQLAlchemy ORM](http://www.sqlalchemy.org/)
-      * [WTForms form rendering and validation](https://github.com/wtforms/wtforms)
-      * [Arrow time library](http://crsmithdev.com/arrow/)
-      * [Alembic migrations](https://bitbucket.org/zzzeek/alembic)
-      * [pytest to run the tests](http://pytest.org/latest/)
+      **See also:**
 
-  .step(data-file='application.py', data-highlight='23-74')
+      * [Twilio Python SMS Quick Start](https://www.twilio.com/docs/quickstart/python/sms)
+      * [Twilio Python Helper Library](https://github.com/twilio/twilio-python/)
+      * [Twilio REST API docs](https://www.twilio.com/docs/api)
+      * [Flask docs](http://flask.pocoo.org/docs/0.10/)
+      * [Celery docs](http://docs.celeryproject.org/en/latest/index.html)
+
+  .step(data-file='.env.example', data-highlight='8-11')
+    :markdown
+      ## Configure the application to use Twilio
+
+      Before we can use the Twilio API to send reminder text messages, we need
+      to configure our account credentials. These can be found on your
+      [Twilio dashboard](https://www.twilio.com/user/account/voice). You'll also
+      need an SMS-enabled phone number - you can find or purchase a new one to
+      use [here](https://www.twilio.com/user/account/phone-numbers/incoming).
+
+      We put these environment variables in a `.env` file and use
+      [autoenv](https://github.com/kennethreitz/autoenv) to apply them every
+      time we work on the project. More information on how to configure this
+      application can be found in the project
+      [README](https://github.com/TwilioDevEd/appointment-reminders-flask).
+
+      ---
+
+      **See also:**
+
+      * [Autoenv on GitHub](https://github.com/kennethreitz/autoenv)
+      * [Your Account SID and Auth Token](https://www.twilio.com/user/account)
+      * [Your Available Phone Numbers](https://www.twilio.com/user/account/phone-numbers/incoming)
+
+  .step(data-file='application.py', data-highlight='24-78')
     :markdown
       ## The application structure
 
-      The `Application` object configures SQLAlchemy, Flask, Twilio
-      credentials and Celery. The properties of this object are then
-      used in the rest of the app. The app is configured used
-      environment variables. The required variables can be found in `.env.example`
+      The `Application` object is the heart of any Flask app. Our initializes
+      the app, sets the URLs, and pulls in all our environment variables.
 
-      ## Setting environment variables
+      The `celery` method is just some boilerplate to configure Celery to use
+      the settings and context of our Flask application. Our app uses
+      [Redis](http://redis.io/) as our Celery broker.
 
-      You can either export each of the variables or use autoenv to load them as you cd into the repository.
-
-  .step(data-file='application.py', data-highlight='66-70')
-    :markdown
-      ## Configuring Twilio credentials
-
-      To send messages using Twilio's API you will need a Twilio
-      Account SID and a Twilio token. You can find all of these in
-      your [Twilio dashboard](https://www.twilio.com/user/account/voice). You will
-      also need to configure a Twilio sending number that you can
-      get/purchase in [the number management
-      page](https://www.twilio.com/user/account/phone-numbers/incoming). The
-      variables read from the environment will be stored as part of
-      Flask's `config` dictionary so we can access them later.
-
-      ## Other configuration
-
-      We also need to configure the database (in this case
-      PostgreSQL), a [Celery
-      broker](http://celery.readthedocs.org/en/latest/getting-started/brokers/)
-      (in this case Redis) and a secret key Flask will use to encrypt
-      cookies.
-
-  .step(data-file='views/appointment.py', data-highlight='22-38')
-    :markdown
-      ## Scheduling appointment reminders
-
-      When a POST request is submitted to `/appointment` the
-      corresponding handler will use WTForms to verify that the
-      submitted data is valid. If the data is valid we will insert an
-      appointment row into the database and schedule a job with Celery
-      to send the reminder. If everything goes according to the plan
-      the app redirects the user back to the index page. Notice that
-      this handler only passes the appointment's ID to the Celery task
-      that will send the message.
-
-      ## Other handlers
-
-      There are two more handlers implemented within the application:
-      one to delete existing appointments and one to show an index of
-      all existing appointments. You can find the source for both of
-      these in the same file.
+      To get Celery to run locally on your machine, follow the instructions in
+      the [README](https://github.com/TwilioDevEd/appointment-reminders-flask).
 
       ---
 
-      ## See also
-      [The celery documentation on scheduling
-      tasks](http://celery.readthedocs.org/en/latest/userguide/calling.html#eta-and-countdown)
+      **See also:**
 
-  .step(data-file='tasks.py')
+      * [Flask Configuration Handling](http://flask.pocoo.org/docs/0.10/config/)
+      * [Flask Celery integration](http://flask.pocoo.org/docs/0.10/patterns/celery/)
+      * [Celery brokers](http://celery.readthedocs.org/en/latest/getting-started/brokers/)
+
+  .step(data-file='models/appointment.py')
     :markdown
-      ## Configuring the application to use Twilio's API
+      ## The Appointment model
 
-      We have already put all the configuration we need as part of
-      Flask's `config` dictionary. Now we just need read from the
-      dictionary and initialize Twilio's REST client. We need to pass
-      the Twilio Account SID and the Twilio token to the constructor
-      as keyword arguments. Alternatively, we could let the object
-      read the variables from the environment.
+      Our Appointment model is pretty simple. The `name` and `phone_number`
+      fields tell us who to send the reminder to. The `time`, `timezone`, and
+      `delta` fields tell us when to send the reminder.
 
-      ## Finding appointment details
+      We use [SQLAlchemy](http://www.sqlalchemy.org/) to power our model and
+      give us a nice ORM interface to use it with.
 
-      Since the function to send notifications will be executed by
-      Celery we need to decorate its definition with Celery's
-      generated helpers. This will register the task with Celery. We
-      want to include some details in the SMS notification so we will
-      query the database for the appointment's details before sending
-      the notification.
-
-      If the scheduled task cannot find an appointment with the
-      scheduled ID then it simply returns doing nothing. This means
-      the appointment has been deleted and therefore we don't need to
-      do anything.
-
-  .step(data-file='tasks.py', data-highlight='28-32')
-    :markdown
-      ## Sending SMS using the API
-
-      All we need to do now is call the methods in the client
-      object. We will need to pass a destination phone number, a
-      sending phone number and the message we want to send. The
-      library will take it from there
+      We added an extra method, `get_notification_time`, to help us determine
+      the right time to send our reminders. The handy
+      [arrow](http://crsmithdev.com/arrow/) library makes this kind of time
+      arithmatic easy.
 
       ---
 
-      ### See also
+      **See also:**
 
-      * [Twilio's documentation on sending messages using
-        Python](https://twilio-python.readthedocs.org/en/latest/usage/messages.html)
+      * [SQLAlchemy declarative base](http://docs.sqlalchemy.org/en/rel_1_0/orm/extensions/declarative/basic_use.html)
+      * [Arrow replace & shift](http://crsmithdev.com/arrow/#replace-shift)
 
-  .step(data-file='reminders.py')
+  .step(data-file='views/appointment.py', data-highlight='20-38')
     :markdown
-      ## Exposing Celery's application object
+      ## Scheduling new reminders
 
-      We already configured Celery to use Redis in the first
-      step, but now we need to expose [Celery's application
-      object](http://celery.readthedocs.org/en/latest/userguide/application.html)
-      so we can register tasks against it. It's also necessary to
-      expose this object so we can run a Celery worker.
+      This view handles creating new appointments and scheduling new reminders.
+      It accepts POST data sent to the `/appointment` URL.
 
-      ## Running the Celery worker
+      We use [WTForms](https://flask-wtf.readthedocs.org/en/latest/index.html)
+      to validate the form data using a class called `NewAppointmentForm` that
+      we defined in `forms/new_appointment.py`.
 
-      Now that we have scheduled tasks we need a worker to run
-      them. For this application, running the following command in the
-      root of the application should suffice:
+      After that we use [arrow](http://crsmithdev.com/arrow/) to convert the
+      time zone of the appointment's time to UTC time.
 
-      ```
-      celery -A reminders.celery worker
-      ```
-      Here `reminders` is the module containing the already configured
-      celery object.
+      We then save our new `Appointment` object and schedule the reminder using
+      a Celery task we defined called `send_sms_reminder`. We'll look at that
+      task next.
+
+      ---
+
+      **See also:**
+
+      * [Flask-WTF Quickstart](https://flask-wtf.readthedocs.org/en/latest/quickstart.html)
+      * [Arrow time zone conversion](http://crsmithdev.com/arrow/#convert)
+      * [Celery - Calling Tasks](http://celery.readthedocs.org/en/latest/userguide/calling.html)
+      * [Celery - ETA Parameter](http://celery.readthedocs.org/en/latest/userguide/calling.html#eta-and-countdown)
+
+  .step(data-file='tasks.py', data-highlight='1-11')
+    :markdown
+      ## Set up a Twilio API client
+
+      Our `tasks.py` module contains the definition for our `send_sms_reminder`
+      task.
+
+      At the top of this module we use the
+      [twilio-python](https://github.com/twilio/twilio-python) library to create
+      a new instance of `TwilioRestClient`.
+
+      We'll use this `client` object to send a text message using the Twilio API
+      in our `send_sms_reminder` function. Let's look at that now.
+
+      ---
+
+      **See also:**
+
+      * [Using configuration values in Flask](http://flask.pocoo.org/docs/0.10/config/)
+      * [Accessing REST resources with twilio-python](https://twilio-python.readthedocs.org/en/latest/usage/basics.html)
+
+  .step(data-file='tasks.py', data-highlight='11-32')
+    :markdown
+      ## Sending a reminder
+
+      This is the `send_sms_reminder` function we called in our
+      `appointment.create` view.
+
+      Our function starts with an `appointment_id` parameter, which we use to
+      retrieve an `Appointment` object from the database - a Celery best
+      practice.
+
+      To compose the body of our text message, we use
+      [arrow](http://crsmithdev.com/arrow/) again to convert the UTC time
+      stored in our appointment to the local time zone of our customer.
+
+      After that, sending the message itself is a simple call to
+      `client.messages.create()`. We use our customer's phone number as the
+      `to` argument and our Twilio number as the `from` argument.
+
+      ---
+
+      **See also:**
+
+      * [Sending messages with twilio-python](https://twilio-python.readthedocs.org/en/latest/usage/messages.html)
+      * [Defining Celery tasks](http://celery.readthedocs.org/en/latest/userguide/tasks.html)
+      * [Arrow time zone conversion](http://crsmithdev.com/arrow/#convert)
+
+  .step(data-file='tasks.py', data-highlight='11-32')
+    :markdown
+      ## Where to next?
+
+      That's it! Our Flask application is all set to send out reminders for
+      upcoming appointments. We hope you found this sample application useful.
+
+      If you're a Python developer working with Twilio, you might enjoy these
+      other tutorials:
+
+      ### [Click to Call](https://www.twilio.com/docs/howto/walkthrough/click-to-call/python/flask)
+      Put a button on your web page that connects visitors to live support or
+      sales people via telephone.
+
+      ### [Two-Factor Authentication](https://www.twilio.com/docs/howto/walkthrough/two-factor-authentication/python/flask)
+      Improve the security of Laravel's built-in login functionality by adding
+      two-factor authentication via text message.
+
+      ### Did this help?
+      As always, we'd love to hear what you thought of this tutorial!
+      [Shoot us a note](mailto:devedoss@twilio.com) to let us know what you
+      liked and what we can do better. See you next time!

@@ -9,111 +9,147 @@
 .wrapper {
   height:100%;
   width:100%;
-}</style><link rel="shortcut icon" href="//twilio.com/bundles/marketing/img/favicons/favicon.ico"><link rel="apple-touch-icon" href="//twilio.com/bundles/marketing/img/favicons/favicon_57.png"><link rel="apple-touch-icon" sizes="72x72" href="//twilio.com/bundles/marketing/img/favicons/favicon_72.png"><link rel="apple-touch-icon" sizes="114x114" href="//twilio.com/bundles/marketing/img/favicons/favicon_114.png"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"><link rel="stylesheet" href="viewsaurus.css"></head><body><div class="wrapper"><div id="viewsaurus" data-title="Appointment reminders"><div class="saurus-panes"><div class="saurus-prose"><div class="saurus-prose-header"><div class="title-outer"><span class="step-title">Appointment reminders</span></div></div><div class="saurus-nav-buttons"><div class="saurus-nav-button nav-overview"><div class="saurus-nav-button-inner"><i class="fa fa-fw fa-list"></i></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-previous"><div class="saurus-nav-button-inner"><a href=""> <i class="fa fa-fw fa-play fa-rotate-180"></i></a></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-next clickable"><div class="saurus-nav-button-inner"><a href="#1"> <i class="fa fa-fw fa-play"></i></a></div></div><div class="saurus-next-title"><span class="next-title-inner"></span></div></div><div class="saurus-progress-bar"></div><div class="saurus-start"><p>Learn to implement appointment reminders functionality with Python and Flask</p><a href="#0">Start Tutorial</a></div><div class="saurus-content"><div data-title="The application structure" class="chapter"><div data-file="application.py" data-title="" class="step"><h2 id="what-does-the-application-do-">What does the application do?</h2>
-<p>The application allows users to schedule appointment reminders
-for customers. The user add a name, a time, a notification time
-and phone number and the application will send the customer a
-reminder using <a href="https://www.twilio.com/docs/python/install">Twilio&#39;s API</a>. The application uses
-<a href="http://flask.pocoo.org/">Flask</a> as the underlying web
-framework and <a href="http://www.celeryproject.org/">Celery</a> as the task scheduler.</p>
-<p>Head to the app&#39;s <a href="https://github.com/TwilioDevEd/appointment-reminders-flask/blob/master/readme.md">readme
-file</a>
-to learn how to run the application in your own computer.</p>
+}</style><link rel="shortcut icon" href="//twilio.com/bundles/marketing/img/favicons/favicon.ico"><link rel="apple-touch-icon" href="//twilio.com/bundles/marketing/img/favicons/favicon_57.png"><link rel="apple-touch-icon" sizes="72x72" href="//twilio.com/bundles/marketing/img/favicons/favicon_72.png"><link rel="apple-touch-icon" sizes="114x114" href="//twilio.com/bundles/marketing/img/favicons/favicon_114.png"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"><link rel="stylesheet" href="viewsaurus.css"></head><body><div class="wrapper"><div id="viewsaurus" data-title="Appointment reminders"><div class="saurus-panes"><div class="saurus-prose"><div class="saurus-prose-header"><div class="title-outer"><span class="step-title">Appointment reminders</span></div></div><div class="saurus-nav-buttons"><div class="saurus-nav-button nav-overview"><div class="saurus-nav-button-inner"><i class="fa fa-fw fa-list"></i></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-previous"><div class="saurus-nav-button-inner"><a href=""> <i class="fa fa-fw fa-play fa-rotate-180"></i></a></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-next clickable"><div class="saurus-nav-button-inner"><a href="#1"> <i class="fa fa-fw fa-play"></i></a></div></div><div class="saurus-next-title"><span class="next-title-inner"></span></div></div><div class="saurus-progress-bar"></div><div class="saurus-start"><p>Learn to implement appointment reminders functionality with Python and Flask</p><a href="#0">Start Tutorial</a></div><div class="saurus-content"><div data-title="Appointment reminders with Twilio and Flask" class="chapter"><div data-file="tasks.py" data-highlight="11-32" class="step"><h2 id="what-does-this-thing-do-">What does this thing do?</h2>
+<p>This web application shows how you can use Twilio to send your
+customers a text message reminding them of upcoming appointments.</p>
+<p>We use <a href="http://flask.pocoo.org/">Flask</a> to build out the web application
+that supports our user interface, and
+<a href="http://www.celeryproject.org/">Celery</a> to send the reminder text messages
+to our customers at the right time.</p>
+<p>In this tutorial, we&#39;ll point out the key bits of code that make this
+application work. Check out the project
+<a href="https://github.com/TwilioDevEd/appointment-reminders-flask/blob/master/README.md">README</a>
+on GitHub to see how to run the code yourself.</p>
 <hr>
-<h3 id="other-libraries-used-in-this-app">Other libraries used in this app</h3>
+<p><strong>See also:</strong></p>
 <ul>
-<li><a href="http://www.sqlalchemy.org/">SQLAlchemy ORM</a></li>
-<li><a href="https://github.com/wtforms/wtforms">WTForms form rendering and validation</a></li>
-<li><a href="http://crsmithdev.com/arrow/">Arrow time library</a></li>
-<li><a href="https://bitbucket.org/zzzeek/alembic">Alembic migrations</a></li>
-<li><a href="http://pytest.org/latest/">pytest to run the tests</a></li>
+<li><a href="https://www.twilio.com/docs/quickstart/python/sms">Twilio Python SMS Quick Start</a></li>
+<li><a href="https://github.com/twilio/twilio-python/">Twilio Python Helper Library</a></li>
+<li><a href="https://www.twilio.com/docs/api">Twilio REST API docs</a></li>
+<li><a href="http://flask.pocoo.org/docs/0.10/">Flask docs</a></li>
+<li><a href="http://docs.celeryproject.org/en/latest/index.html">Celery docs</a></li>
 </ul>
-</div><div data-file="application.py" data-highlight="23-74" class="step"><h2 id="the-application-structure">The application structure</h2>
-<p>The <code>Application</code> object configures SQLAlchemy, Flask, Twilio
-credentials and Celery. The properties of this object are then
-used in the rest of the app. The app is configured used
-environment variables. The required variables can be found in <code>.env.example</code></p>
-<h2 id="setting-environment-variables">Setting environment variables</h2>
-<p>You can either export each of the variables or use autoenv to load them as you cd into the repository.</p>
-</div><div data-file="application.py" data-highlight="66-70" class="step"><h2 id="configuring-twilio-credentials">Configuring Twilio credentials</h2>
-<p>To send messages using Twilio&#39;s API you will need a Twilio
-Account SID and a Twilio token. You can find all of these in
-your <a href="https://www.twilio.com/user/account/voice">Twilio dashboard</a>. You will
-also need to configure a Twilio sending number that you can
-get/purchase in <a href="https://www.twilio.com/user/account/phone-numbers/incoming">the number management
-page</a>. The
-variables read from the environment will be stored as part of
-Flask&#39;s <code>config</code> dictionary so we can access them later.</p>
-<h2 id="other-configuration">Other configuration</h2>
-<p>We also need to configure the database (in this case
-PostgreSQL), a <a href="http://celery.readthedocs.org/en/latest/getting-started/brokers/">Celery
-broker</a>
-(in this case Redis) and a secret key Flask will use to encrypt
-cookies.</p>
-</div><div data-file="views/appointment.py" data-highlight="22-38" class="step"><h2 id="scheduling-appointment-reminders">Scheduling appointment reminders</h2>
-<p>When a POST request is submitted to <code>/appointment</code> the
-corresponding handler will use WTForms to verify that the
-submitted data is valid. If the data is valid we will insert an
-appointment row into the database and schedule a job with Celery
-to send the reminder. If everything goes according to the plan
-the app redirects the user back to the index page. Notice that
-this handler only passes the appointment&#39;s ID to the Celery task
-that will send the message.</p>
-<h2 id="other-handlers">Other handlers</h2>
-<p>There are two more handlers implemented within the application:
-one to delete existing appointments and one to show an index of
-all existing appointments. You can find the source for both of
-these in the same file.</p>
+</div><div data-file=".env.example" data-highlight="8-11" class="step"><h2 id="configure-the-application-to-use-twilio">Configure the application to use Twilio</h2>
+<p>Before we can use the Twilio API to send reminder text messages, we need
+to configure our account credentials. These can be found on your
+<a href="https://www.twilio.com/user/account/voice">Twilio dashboard</a>. You&#39;ll also
+need an SMS-enabled phone number - you can find or purchase a new one to
+use <a href="https://www.twilio.com/user/account/phone-numbers/incoming">here</a>.</p>
+<p>We put these environment variables in a <code>.env</code> file and use
+<a href="https://github.com/kennethreitz/autoenv">autoenv</a> to apply them every
+time we work on the project. More information on how to configure this
+application can be found in the project
+<a href="https://github.com/TwilioDevEd/appointment-reminders-flask">README</a>.</p>
 <hr>
-<h2 id="see-also">See also</h2>
-<p><a href="http://celery.readthedocs.org/en/latest/userguide/calling.html#eta-and-countdown">The celery documentation on scheduling
-tasks</a></p>
-</div><div data-file="tasks.py" class="step"><h2 id="configuring-the-application-to-use-twilio-s-api">Configuring the application to use Twilio&#39;s API</h2>
-<p>We have already put all the configuration we need as part of
-Flask&#39;s <code>config</code> dictionary. Now we just need read from the
-dictionary and initialize Twilio&#39;s REST client. We need to pass
-the Twilio Account SID and the Twilio token to the constructor
-as keyword arguments. Alternatively, we could let the object
-read the variables from the environment.</p>
-<h2 id="finding-appointment-details">Finding appointment details</h2>
-<p>Since the function to send notifications will be executed by
-Celery we need to decorate its definition with Celery&#39;s
-generated helpers. This will register the task with Celery. We
-want to include some details in the SMS notification so we will
-query the database for the appointment&#39;s details before sending
-the notification.</p>
-<p>If the scheduled task cannot find an appointment with the
-scheduled ID then it simply returns doing nothing. This means
-the appointment has been deleted and therefore we don&#39;t need to
-do anything.</p>
-</div><div data-file="tasks.py" data-highlight="28-32" class="step"><h2 id="sending-sms-using-the-api">Sending SMS using the API</h2>
-<p>All we need to do now is call the methods in the client
-object. We will need to pass a destination phone number, a
-sending phone number and the message we want to send. The
-library will take it from there</p>
-<hr>
-<h3 id="see-also">See also</h3>
+<p><strong>See also:</strong></p>
 <ul>
-<li><a href="https://twilio-python.readthedocs.org/en/latest/usage/messages.html">Twilio&#39;s documentation on sending messages using
-Python</a></li>
+<li><a href="https://github.com/kennethreitz/autoenv">Autoenv on GitHub</a></li>
+<li><a href="https://www.twilio.com/user/account">Your Account SID and Auth Token</a></li>
+<li><a href="https://www.twilio.com/user/account/phone-numbers/incoming">Your Available Phone Numbers</a></li>
 </ul>
-</div><div data-file="reminders.py" class="step"><h2 id="exposing-celery-s-application-object">Exposing Celery&#39;s application object</h2>
-<p>We already configured Celery to use Redis in the first
-step, but now we need to expose <a href="http://celery.readthedocs.org/en/latest/userguide/application.html">Celery&#39;s application
-object</a>
-so we can register tasks against it. It&#39;s also necessary to
-expose this object so we can run a Celery worker.</p>
-<h2 id="running-the-celery-worker">Running the Celery worker</h2>
-<p>Now that we have scheduled tasks we need a worker to run
-them. For this application, running the following command in the
-root of the application should suffice:</p>
-<pre><code>celery -A reminders.celery worker
-</code></pre><p>Here <code>reminders</code> is the module containing the already configured
-celery object.</p>
+</div><div data-file="application.py" data-highlight="24-78" class="step"><h2 id="the-application-structure">The application structure</h2>
+<p>The <code>Application</code> object is the heart of any Flask app. Our initializes
+the app, sets the URLs, and pulls in all our environment variables.</p>
+<p>The <code>celery</code> method is just some boilerplate to configure Celery to use
+the settings and context of our Flask application. Our app uses
+<a href="http://redis.io/">Redis</a> as our Celery broker.</p>
+<p>To get Celery to run locally on your machine, follow the instructions in
+the <a href="https://github.com/TwilioDevEd/appointment-reminders-flask">README</a>.</p>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="http://flask.pocoo.org/docs/0.10/config/">Flask Configuration Handling</a></li>
+<li><a href="http://flask.pocoo.org/docs/0.10/patterns/celery/">Flask Celery integration</a></li>
+<li><a href="http://celery.readthedocs.org/en/latest/getting-started/brokers/">Celery brokers</a></li>
+</ul>
+</div><div data-file="models/appointment.py" class="step"><h2 id="the-appointment-model">The Appointment model</h2>
+<p>Our Appointment model is pretty simple. The <code>name</code> and <code>phone_number</code>
+fields tell us who to send the reminder to. The <code>time</code>, <code>timezone</code>, and
+<code>delta</code> fields tell us when to send the reminder.</p>
+<p>We use <a href="http://www.sqlalchemy.org/">SQLAlchemy</a> to power our model and
+give us a nice ORM interface to use it with.</p>
+<p>We added an extra method, <code>get_notification_time</code>, to help us determine
+the right time to send our reminders. The handy
+<a href="http://crsmithdev.com/arrow/">arrow</a> library makes this kind of time
+arithmatic easy.</p>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="http://docs.sqlalchemy.org/en/rel_1_0/orm/extensions/declarative/basic_use.html">SQLAlchemy declarative base</a></li>
+<li><a href="http://crsmithdev.com/arrow/#replace-shift">Arrow replace &amp; shift</a></li>
+</ul>
+</div><div data-file="views/appointment.py" data-highlight="20-38" class="step"><h2 id="scheduling-new-reminders">Scheduling new reminders</h2>
+<p>This view handles creating new appointments and scheduling new reminders.
+It accepts POST data sent to the <code>/appointment</code> URL.</p>
+<p>We use <a href="https://flask-wtf.readthedocs.org/en/latest/index.html">WTForms</a>
+to validate the form data using a class called <code>NewAppointmentForm</code> that
+we defined in <code>forms/new_appointment.py</code>.</p>
+<p>After that we use <a href="http://crsmithdev.com/arrow/">arrow</a> to convert the
+time zone of the appointment&#39;s time to UTC time.</p>
+<p>We then save our new <code>Appointment</code> object and schedule the reminder using
+a Celery task we defined called <code>send_sms_reminder</code>. We&#39;ll look at that
+task next.</p>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="https://flask-wtf.readthedocs.org/en/latest/quickstart.html">Flask-WTF Quickstart</a></li>
+<li><a href="http://crsmithdev.com/arrow/#convert">Arrow time zone conversion</a></li>
+<li><a href="http://celery.readthedocs.org/en/latest/userguide/calling.html">Celery - Calling Tasks</a></li>
+<li><a href="http://celery.readthedocs.org/en/latest/userguide/calling.html#eta-and-countdown">Celery - ETA Parameter</a></li>
+</ul>
+</div><div data-file="tasks.py" data-highlight="1-11" class="step"><h2 id="set-up-a-twilio-api-client">Set up a Twilio API client</h2>
+<p>Our <code>tasks.py</code> module contains the definition for our <code>send_sms_reminder</code>
+task.</p>
+<p>At the top of this module we use the
+<a href="https://github.com/twilio/twilio-python">twilio-python</a> library to create
+a new instance of <code>TwilioRestClient</code>.</p>
+<p>We&#39;ll use this <code>client</code> object to send a text message using the Twilio API
+in our <code>send_sms_reminder</code> function. Let&#39;s look at that now.</p>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="http://flask.pocoo.org/docs/0.10/config/">Using configuration values in Flask</a></li>
+<li><a href="https://twilio-python.readthedocs.org/en/latest/usage/basics.html">Accessing REST resources with twilio-python</a></li>
+</ul>
+</div><div data-file="tasks.py" data-highlight="11-32" class="step"><h2 id="sending-a-reminder">Sending a reminder</h2>
+<p>This is the <code>send_sms_reminder</code> function we called in our
+<code>appointment.create</code> view.</p>
+<p>Our function starts with an <code>appointment_id</code> parameter, which we use to
+retrieve an <code>Appointment</code> object from the database - a Celery best
+practice.</p>
+<p>To compose the body of our text message, we use
+<a href="http://crsmithdev.com/arrow/">arrow</a> again to convert the UTC time
+stored in our appointment to the local time zone of our customer.</p>
+<p>After that, sending the message itself is a simple call to
+<code>client.messages.create()</code>. We use our customer&#39;s phone number as the
+<code>to</code> argument and our Twilio number as the <code>from</code> argument.</p>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="https://twilio-python.readthedocs.org/en/latest/usage/messages.html">Sending messages with twilio-python</a></li>
+<li><a href="http://celery.readthedocs.org/en/latest/userguide/tasks.html">Defining Celery tasks</a></li>
+<li><a href="http://crsmithdev.com/arrow/#convert">Arrow time zone conversion</a></li>
+</ul>
+</div><div data-file="tasks.py" data-highlight="11-32" class="step"><h2 id="where-to-next-">Where to next?</h2>
+<p>That&#39;s it! Our Flask application is all set to send out reminders for
+upcoming appointments. We hope you found this sample application useful.</p>
+<p>If you&#39;re a Python developer working with Twilio, you might enjoy these
+other tutorials:</p>
+<h3 id="-click-to-call-https-www-twilio-com-docs-howto-walkthrough-click-to-call-python-flask-"><a href="https://www.twilio.com/docs/howto/walkthrough/click-to-call/python/flask">Click to Call</a></h3>
+<p>Put a button on your web page that connects visitors to live support or
+sales people via telephone.</p>
+<h3 id="-two-factor-authentication-https-www-twilio-com-docs-howto-walkthrough-two-factor-authentication-python-flask-"><a href="https://www.twilio.com/docs/howto/walkthrough/two-factor-authentication/python/flask">Two-Factor Authentication</a></h3>
+<p>Improve the security of Laravel&#39;s built-in login functionality by adding
+two-factor authentication via text message.</p>
+<h3 id="did-this-help-">Did this help?</h3>
+<p>As always, we&#39;d love to hear what you thought of this tutorial!
+<a href="mailto:devedoss@twilio.com">Shoot us a note</a> to let us know what you
+liked and what we can do better. See you next time!</p>
 </div></div>
-<div class="saurus-files" style="display:none;"><textarea class="saurus-file" data-file="application.py" data-mode="python">aW1wb3J0IGZsYXNrCmltcG9ydCBmbGFzay5leHQuc3FsYWxjaGVteQpmcm9tIGNlbGVyeSBpbXBvcnQgQ2VsZXJ5CmZyb20gdmlld3MuYXBwb2ludG1lbnQgaW1wb3J0IEFwcG9pbnRtZW50UmVzb3VyY2VEZWxldGUsIEFwcG9pbnRtZW50Rm9ybVJlc291cmNlCmZyb20gdmlld3MuYXBwb2ludG1lbnQgaW1wb3J0IEFwcG9pbnRtZW50UmVzb3VyY2VDcmVhdGVJbmRleAoKCmNsYXNzIFJvdXRlKG9iamVjdCk6CgogICAgZGVmIF9faW5pdF9fKHNlbGYsIHVybCwgcm91dGVfbmFtZSwgcmVzb3VyY2UpOgogICAgICAgIHNlbGYudXJsID0gdXJsCiAgICAgICAgc2VsZi5yb3V0ZV9uYW1lID0gcm91dGVfbmFtZQogICAgICAgIHNlbGYucmVzb3VyY2UgPSByZXNvdXJjZQoKaGFuZGxlcnMgPSBbCiAgICBSb3V0ZSgnL2FwcG9pbnRtZW50JywgJ2FwcG9pbnRtZW50LmluZGV4JywgQXBwb2ludG1lbnRSZXNvdXJjZUNyZWF0ZUluZGV4KSwKICAgIFJvdXRlKCcvYXBwb2ludG1lbnQvPGludDppZD4vZGVsZXRlJywKICAgICAgICAgICdhcHBvaW50bWVudC5kZWxldGUnLCBBcHBvaW50bWVudFJlc291cmNlRGVsZXRlKSwKICAgIFJvdXRlKCcvYXBwb2ludG1lbnQvbmV3JywgJ2FwcG9pbnRtZW50Lm5ldycsIEFwcG9pbnRtZW50Rm9ybVJlc291cmNlKSwKXQoKCmNsYXNzIEFwcGxpY2F0aW9uKG9iamVjdCk6CgogICAgZGVmIF9faW5pdF9fKHNlbGYsIHJvdXRlcywgY29uZmlnLCBkZWJ1Zz1UcnVlKToKICAgICAgICBzZWxmLmZsYXNrX2FwcCA9IGZsYXNrLkZsYXNrKF9fbmFtZV9fKQogICAgICAgIHNlbGYucm91dGVzID0gcm91dGVzCiAgICAgICAgc2VsZi5kZWJ1ZyA9IGRlYnVnCiAgICAgICAgc2VsZi5fY29uZmlndXJlX2FwcChjb25maWcpCiAgICAgICAgc2VsZi5fc2V0X3JvdXRlcygpCgogICAgZGVmIGNlbGVyeShzZWxmKToKICAgICAgICBhcHAgPSBzZWxmLmZsYXNrX2FwcAogICAgICAgIGNlbGVyeSA9IENlbGVyeShhcHAuaW1wb3J0X25hbWUsIGJyb2tlcj1hcHAuY29uZmlnWwogICAgICAgICAgICAgICAgICAgICAgICAnQ0VMRVJZX0JST0tFUl9VUkwnXSkKICAgICAgICBjZWxlcnkuY29uZi51cGRhdGUoYXBwLmNvbmZpZykKCiAgICAgICAgVGFza0Jhc2UgPSBjZWxlcnkuVGFzawoKICAgICAgICBjbGFzcyBDb250ZXh0VGFzayhUYXNrQmFzZSk6CiAgICAgICAgICAgIGFic3RyYWN0ID0gVHJ1ZQoKICAgICAgICAgICAgZGVmIF9fY2FsbF9fKHNlbGYsICphcmdzLCAqKmt3YXJncyk6CiAgICAgICAgICAgICAgICB3aXRoIGFwcC5hcHBfY29udGV4dCgpOgogICAgICAgICAgICAgICAgICAgIHJldHVybiBUYXNrQmFzZS5fX2NhbGxfXyhzZWxmLCAqYXJncywgKiprd2FyZ3MpCiAgICAgICAgY2VsZXJ5LlRhc2sgPSBDb250ZXh0VGFzawoKICAgICAgICByZXR1cm4gY2VsZXJ5CgogICAgZGVmIF9zZXRfcm91dGVzKHNlbGYpOgogICAgICAgIGZvciByb3V0ZSBpbiBzZWxmLnJvdXRlczoKICAgICAgICAgICAgYXBwX3ZpZXcgPSByb3V0ZS5yZXNvdXJjZS5hc192aWV3KHJvdXRlLnJvdXRlX25hbWUpCiAgICAgICAgICAgIHNlbGYuZmxhc2tfYXBwLmFkZF91cmxfcnVsZShyb3V0ZS51cmwsIHZpZXdfZnVuYz1hcHBfdmlldykKCiAgICBkZWYgX2NvbmZpZ3VyZV9hcHAoc2VsZiwgZW52KToKICAgICAgICBjZWxlcnlfdXJsID0gZW52LmdldCgnQ0VMRVJZX1VSTCcpCgogICAgICAgIHNlbGYuZmxhc2tfYXBwLmNvbmZpZ1sKICAgICAgICAgICAgJ1NRTEFMQ0hFTVlfREFUQUJBU0VfVVJJJ10gPSBlbnYuZ2V0KCdEQVRBQkFTRV9VUkwnKQoKICAgICAgICBzZWxmLmZsYXNrX2FwcC5jb25maWdbJ0NFTEVSWV9CUk9LRVJfVVJMJ10gPSBlbnYuZ2V0KAogICAgICAgICAgICAnUkVESVNUT0dPX1VSTCcsIGNlbGVyeV91cmwpCiAgICAgICAgc2VsZi5mbGFza19hcHAuY29uZmlnWydDRUxFUllfUkVTVUxUX0JBQ0tFTkQnXSA9IGVudi5nZXQoCiAgICAgICAgICAgICdSRURJU1RPR09fVVJMJywgY2VsZXJ5X3VybCkKCiAgICAgICAgc2VsZi5mbGFza19hcHAuY29uZmlnWydUV0lMSU9fQUNDT1VOVF9TSUQnXSA9IGVudi5nZXQoCiAgICAgICAgICAgICdUV0lMSU9fQUNDT1VOVF9TSUQnKQogICAgICAgIHNlbGYuZmxhc2tfYXBwLmNvbmZpZ1snVFdJTElPX0FVVEhfVE9LRU4nXSA9IGVudi5nZXQoCiAgICAgICAgICAgICdUV0lMSU9fQVVUSF9UT0tFTicpCiAgICAgICAgc2VsZi5mbGFza19hcHAuY29uZmlnWydUV0lMSU9fTlVNQkVSJ10gPSBlbnYuZ2V0KCdUV0lMSU9fTlVNQkVSJykKCiAgICAgICAgc2VsZi5mbGFza19hcHAuc2VjcmV0X2tleSA9IGVudi5nZXQoJ1NFQ1JFVF9LRVknKQoKICAgICAgICBzZWxmLmRiID0gZmxhc2suZXh0LnNxbGFsY2hlbXkuU1FMQWxjaGVteShzZWxmLmZsYXNrX2FwcCkKCiAgICBkZWYgc3RhcnRfYXBwKHNlbGYpOgogICAgICAgIHNlbGYuZmxhc2tfYXBwLnJ1bihkZWJ1Zz1zZWxmLmRlYnVnKQo=</textarea>
-<textarea class="saurus-file" data-file="views/appointment.py" data-mode="python">ZnJvbSBmbGFzay52aWV3cyBpbXBvcnQgTWV0aG9kVmlldwpmcm9tIGZsYXNrIGltcG9ydCByZW5kZXJfdGVtcGxhdGUKZnJvbSBtb2RlbHMuYXBwb2ludG1lbnQgaW1wb3J0IEFwcG9pbnRtZW50CmZyb20gZm9ybXMubmV3X2FwcG9pbnRtZW50IGltcG9ydCBOZXdBcHBvaW50bWVudEZvcm0KZnJvbSBmbGFzayBpbXBvcnQgcmVxdWVzdCwgcmVkaXJlY3QsIHVybF9mb3IKaW1wb3J0IHJlbWluZGVycwppbXBvcnQgYXJyb3cKCgpjbGFzcyBBcHBvaW50bWVudFJlc291cmNlRGVsZXRlKE1ldGhvZFZpZXcpOgoKICAgIGRlZiBwb3N0KHNlbGYsIGlkKToKICAgICAgICBhcHB0ID0gcmVtaW5kZXJzLmRiLnNlc3Npb24ucXVlcnkoQXBwb2ludG1lbnQpLmZpbHRlcl9ieShpZD1pZCkub25lKCkKICAgICAgICByZW1pbmRlcnMuZGIuc2Vzc2lvbi5kZWxldGUoYXBwdCkKICAgICAgICByZW1pbmRlcnMuZGIuc2Vzc2lvbi5jb21taXQoKQoKICAgICAgICByZXR1cm4gcmVkaXJlY3QodXJsX2ZvcignYXBwb2ludG1lbnQuaW5kZXgnKSwgY29kZT0zMDMpCgoKY2xhc3MgQXBwb2ludG1lbnRSZXNvdXJjZUNyZWF0ZUluZGV4KE1ldGhvZFZpZXcpOgoKICAgIGRlZiBwb3N0KHNlbGYpOgogICAgICAgIGZvcm0gPSBOZXdBcHBvaW50bWVudEZvcm0ocmVxdWVzdC5mb3JtKQoKICAgICAgICBpZiBmb3JtLnZhbGlkYXRlKCk6CiAgICAgICAgICAgIGZyb20gdGFza3MgaW1wb3J0IHNlbmRfc21zX3JlbWluZGVyCgogICAgICAgICAgICBhcHB0ID0gQXBwb2ludG1lbnQoKipmb3JtLmRhdGEpCiAgICAgICAgICAgIGFwcHQudGltZSA9IGFycm93LmdldChhcHB0LnRpbWUsIGFwcHQudGltZXpvbmUpLnRvKCd1dGMnKS5uYWl2ZQoKICAgICAgICAgICAgcmVtaW5kZXJzLmRiLnNlc3Npb24uYWRkKGFwcHQpCiAgICAgICAgICAgIHJlbWluZGVycy5kYi5zZXNzaW9uLmNvbW1pdCgpCiAgICAgICAgICAgIHNlbmRfc21zX3JlbWluZGVyLmFwcGx5X2FzeW5jKAogICAgICAgICAgICAgICAgYXJncz1bYXBwdC5pZF0sIGV0YT1hcHB0Lm5vdGlmaWNhdGlvbl90aW1lKCkpCgogICAgICAgICAgICByZXR1cm4gcmVkaXJlY3QodXJsX2ZvcignYXBwb2ludG1lbnQuaW5kZXgnKSwgY29kZT0zMDMpCiAgICAgICAgZWxzZToKICAgICAgICAgICAgcmV0dXJuIHJlbmRlcl90ZW1wbGF0ZSgnYXBwb2ludG1lbnRzL25ldy5odG1sJywgZm9ybT1mb3JtKSwgNDAwCgogICAgZGVmIGdldChzZWxmKToKICAgICAgICBhbGxfYXBwb2ludG1lbnRzID0gcmVtaW5kZXJzLmRiLnNlc3Npb24ucXVlcnkoQXBwb2ludG1lbnQpLmFsbCgpCiAgICAgICAgcmV0dXJuIHJlbmRlcl90ZW1wbGF0ZSgnYXBwb2ludG1lbnRzL2luZGV4Lmh0bWwnLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYXBwb2ludG1lbnRzPWFsbF9hcHBvaW50bWVudHMpCgoKY2xhc3MgQXBwb2ludG1lbnRGb3JtUmVzb3VyY2UoTWV0aG9kVmlldyk6CgogICAgZGVmIGdldChzZWxmKToKICAgICAgICBmb3JtID0gTmV3QXBwb2ludG1lbnRGb3JtKCkKICAgICAgICByZXR1cm4gcmVuZGVyX3RlbXBsYXRlKCdhcHBvaW50bWVudHMvbmV3Lmh0bWwnLCBmb3JtPWZvcm0pCg==</textarea>
-<textarea class="saurus-file" data-file="tasks.py" data-mode="python">ZnJvbSByZW1pbmRlcnMgaW1wb3J0IGNlbGVyeSwgZGIsIGFwcApmcm9tIG1vZGVscy5hcHBvaW50bWVudCBpbXBvcnQgQXBwb2ludG1lbnQKZnJvbSBzcWxhbGNoZW15Lm9ybS5leGMgaW1wb3J0IE5vUmVzdWx0Rm91bmQKZnJvbSB0d2lsaW8ucmVzdCBpbXBvcnQgVHdpbGlvUmVzdENsaWVudAppbXBvcnQgYXJyb3cKCnR3aWxpb19hY2NvdW50X3NpZCA9IGFwcC5mbGFza19hcHAuY29uZmlnWydUV0lMSU9fQUNDT1VOVF9TSUQnXQp0d2lsaW9fYXV0aF90b2tlbiA9IGFwcC5mbGFza19hcHAuY29uZmlnWydUV0lMSU9fQVVUSF9UT0tFTiddCnR3aWxpb19udW1iZXIgPSBhcHAuZmxhc2tfYXBwLmNvbmZpZ1snVFdJTElPX05VTUJFUiddCgpjbGllbnQgPSBUd2lsaW9SZXN0Q2xpZW50KGFjY291bnQ9dHdpbGlvX2FjY291bnRfc2lkLCB0b2tlbj10d2lsaW9fYXV0aF90b2tlbikKCgpAY2VsZXJ5LnRhc2soKQpkZWYgc2VuZF9zbXNfcmVtaW5kZXIoYXBwb2ludG1lbnRfaWQpOgogICAgdHJ5OgogICAgICAgIGFwcG9pbnRtZW50ID0gZGIuc2Vzc2lvbi5xdWVyeSgKICAgICAgICAgICAgQXBwb2ludG1lbnQpLmZpbHRlcl9ieShpZD1hcHBvaW50bWVudF9pZCkub25lKCkKICAgIGV4Y2VwdCBOb1Jlc3VsdEZvdW5kOgogICAgICAgIHJldHVybgoKICAgIHRpbWUgPSBhcnJvdy5nZXQoYXBwb2ludG1lbnQudGltZSkudG8oYXBwb2ludG1lbnQudGltZXpvbmUpCiAgICBib2R5ID0gIkhlbGxvIHswfS4gWW91IGhhdmUgYW4gYXBwb2ludG1lbnQgYXQgezF9ISIuZm9ybWF0KAogICAgICAgIGFwcG9pbnRtZW50Lm5hbWUsCiAgICAgICAgdGltZS5mb3JtYXQoJ2g6bW0gYScpCiAgICApCgogICAgY2xpZW50Lm1lc3NhZ2VzLmNyZWF0ZSgKICAgICAgICBib2R5PWJvZHksCiAgICAgICAgdG89YXBwb2ludG1lbnQucGhvbmVfbnVtYmVyLAogICAgICAgIGZyb21fPXR3aWxpb19udW1iZXIsCiAgICApCg==</textarea>
-<textarea class="saurus-file" data-file="reminders.py" data-mode="python">ZnJvbSBhcHBsaWNhdGlvbiBpbXBvcnQgaGFuZGxlcnMsIEFwcGxpY2F0aW9uCmltcG9ydCBvcwoKYXBwID0gQXBwbGljYXRpb24oaGFuZGxlcnMsIG9zLmVudmlyb24sIGRlYnVnPVRydWUpCmRiID0gYXBwLmRiCmNlbGVyeSA9IGFwcC5jZWxlcnkoKQoKaW1wb3J0IHRhc2tzCg==</textarea>
+<div class="saurus-files" style="display:none;"><textarea class="saurus-file" data-file="tasks.py" data-mode="python">ZnJvbSByZW1pbmRlcnMgaW1wb3J0IGNlbGVyeSwgZGIsIGFwcApmcm9tIG1vZGVscy5hcHBvaW50bWVudCBpbXBvcnQgQXBwb2ludG1lbnQKZnJvbSBzcWxhbGNoZW15Lm9ybS5leGMgaW1wb3J0IE5vUmVzdWx0Rm91bmQKZnJvbSB0d2lsaW8ucmVzdCBpbXBvcnQgVHdpbGlvUmVzdENsaWVudAppbXBvcnQgYXJyb3cKCnR3aWxpb19hY2NvdW50X3NpZCA9IGFwcC5mbGFza19hcHAuY29uZmlnWydUV0lMSU9fQUNDT1VOVF9TSUQnXQp0d2lsaW9fYXV0aF90b2tlbiA9IGFwcC5mbGFza19hcHAuY29uZmlnWydUV0lMSU9fQVVUSF9UT0tFTiddCnR3aWxpb19udW1iZXIgPSBhcHAuZmxhc2tfYXBwLmNvbmZpZ1snVFdJTElPX05VTUJFUiddCgpjbGllbnQgPSBUd2lsaW9SZXN0Q2xpZW50KGFjY291bnQ9dHdpbGlvX2FjY291bnRfc2lkLCB0b2tlbj10d2lsaW9fYXV0aF90b2tlbikKCgpAY2VsZXJ5LnRhc2soKQpkZWYgc2VuZF9zbXNfcmVtaW5kZXIoYXBwb2ludG1lbnRfaWQpOgogICAgdHJ5OgogICAgICAgIGFwcG9pbnRtZW50ID0gZGIuc2Vzc2lvbi5xdWVyeSgKICAgICAgICAgICAgQXBwb2ludG1lbnQpLmZpbHRlcl9ieShpZD1hcHBvaW50bWVudF9pZCkub25lKCkKICAgIGV4Y2VwdCBOb1Jlc3VsdEZvdW5kOgogICAgICAgIHJldHVybgoKICAgIHRpbWUgPSBhcnJvdy5nZXQoYXBwb2ludG1lbnQudGltZSkudG8oYXBwb2ludG1lbnQudGltZXpvbmUpCiAgICBib2R5ID0gIkhlbGxvIHswfS4gWW91IGhhdmUgYW4gYXBwb2ludG1lbnQgYXQgezF9ISIuZm9ybWF0KAogICAgICAgIGFwcG9pbnRtZW50Lm5hbWUsCiAgICAgICAgdGltZS5mb3JtYXQoJ2g6bW0gYScpCiAgICApCgogICAgY2xpZW50Lm1lc3NhZ2VzLmNyZWF0ZSgKICAgICAgICBib2R5PWJvZHksCiAgICAgICAgdG89YXBwb2ludG1lbnQucGhvbmVfbnVtYmVyLAogICAgICAgIGZyb21fPXR3aWxpb19udW1iZXIsCiAgICApCg==</textarea>
+<textarea class="saurus-file" data-file=".env.example" data-mode="text">IyBFbnZpcm9ubWVudCB2YXJpYWJsZXMgZm9yIGFwcG9pbnRtZW50LXJlbWluZGVycy1mbGFzawoKIyBBcHAgc2V0dGluZ3MKZXhwb3J0IERBVEFCQVNFX1VSTD1wb3N0Z3JlczovL3NvbWV1c2VyOndpdGhzb21lcGFzc3dvcmRAbG9jYWxob3N0OjU0MzIvYXBwb2ludG1lbnRzCmV4cG9ydCBTRUNSRVRfS0VZPWFzdXBlcnNlY3IzdGtleXNob3VsZGdvCmV4cG9ydCBDRUxFUllfVVJMPXJlZGlzOi8vbG9jYWxob3N0OjYzNzkKCiMgVHdpbGlvIHNldHRpbmdzCmV4cG9ydCBUV0lMSU9fQUNDT1VOVF9TSUQ9QUNYWFhYWFhYWFhYWFhYWFhYWApleHBvcnQgVFdJTElPX0FVVEhfVE9LRU49WVlZWVlZWVlZWVlZWVlZWVlZCmV4cG9ydCBUV0lMSU9fTlVNQkVSPSsjIyMjIyMjIyMjIwo=</textarea>
+<textarea class="saurus-file" data-file="application.py" data-mode="python">aW1wb3J0IGZsYXNrCmltcG9ydCBmbGFzay5leHQuc3FsYWxjaGVteQpmcm9tIGNlbGVyeSBpbXBvcnQgQ2VsZXJ5CmZyb20gdmlld3MuYXBwb2ludG1lbnQgaW1wb3J0IEFwcG9pbnRtZW50UmVzb3VyY2VEZWxldGUsIEFwcG9pbnRtZW50Rm9ybVJlc291cmNlCmZyb20gdmlld3MuYXBwb2ludG1lbnQgaW1wb3J0IEFwcG9pbnRtZW50UmVzb3VyY2VDcmVhdGUsIEFwcG9pbnRtZW50UmVzb3VyY2VJbmRleAoKCmNsYXNzIFJvdXRlKG9iamVjdCk6CgogICAgZGVmIF9faW5pdF9fKHNlbGYsIHVybCwgcm91dGVfbmFtZSwgcmVzb3VyY2UpOgogICAgICAgIHNlbGYudXJsID0gdXJsCiAgICAgICAgc2VsZi5yb3V0ZV9uYW1lID0gcm91dGVfbmFtZQogICAgICAgIHNlbGYucmVzb3VyY2UgPSByZXNvdXJjZQoKaGFuZGxlcnMgPSBbCiAgICBSb3V0ZSgnLycsICdhcHBvaW50bWVudC5pbmRleCcsIEFwcG9pbnRtZW50UmVzb3VyY2VJbmRleCksCiAgICBSb3V0ZSgnL2FwcG9pbnRtZW50JywgJ2FwcG9pbnRtZW50LmNyZWF0ZScsIEFwcG9pbnRtZW50UmVzb3VyY2VDcmVhdGUpLAogICAgUm91dGUoJy9hcHBvaW50bWVudC88aW50OmlkPi9kZWxldGUnLAogICAgICAgICAgJ2FwcG9pbnRtZW50LmRlbGV0ZScsIEFwcG9pbnRtZW50UmVzb3VyY2VEZWxldGUpLAogICAgUm91dGUoJy9hcHBvaW50bWVudC9uZXcnLCAnYXBwb2ludG1lbnQubmV3JywgQXBwb2ludG1lbnRGb3JtUmVzb3VyY2UpLApdCgoKY2xhc3MgQXBwbGljYXRpb24ob2JqZWN0KToKCiAgICBkZWYgX19pbml0X18oc2VsZiwgcm91dGVzLCBjb25maWcsIGRlYnVnPVRydWUpOgogICAgICAgIHNlbGYuZmxhc2tfYXBwID0gZmxhc2suRmxhc2soX19uYW1lX18pCiAgICAgICAgc2VsZi5yb3V0ZXMgPSByb3V0ZXMKICAgICAgICBzZWxmLmRlYnVnID0gZGVidWcKICAgICAgICBzZWxmLl9jb25maWd1cmVfYXBwKGNvbmZpZykKICAgICAgICBzZWxmLl9zZXRfcm91dGVzKCkKCiAgICBkZWYgY2VsZXJ5KHNlbGYpOgogICAgICAgIGFwcCA9IHNlbGYuZmxhc2tfYXBwCiAgICAgICAgY2VsZXJ5ID0gQ2VsZXJ5KGFwcC5pbXBvcnRfbmFtZSwgYnJva2VyPWFwcC5jb25maWdbCiAgICAgICAgICAgICAgICAgICAgICAgICdDRUxFUllfQlJPS0VSX1VSTCddKQogICAgICAgIGNlbGVyeS5jb25mLnVwZGF0ZShhcHAuY29uZmlnKQoKICAgICAgICBUYXNrQmFzZSA9IGNlbGVyeS5UYXNrCgogICAgICAgIGNsYXNzIENvbnRleHRUYXNrKFRhc2tCYXNlKToKICAgICAgICAgICAgYWJzdHJhY3QgPSBUcnVlCgogICAgICAgICAgICBkZWYgX19jYWxsX18oc2VsZiwgKmFyZ3MsICoqa3dhcmdzKToKICAgICAgICAgICAgICAgIHdpdGggYXBwLmFwcF9jb250ZXh0KCk6CiAgICAgICAgICAgICAgICAgICAgcmV0dXJuIFRhc2tCYXNlLl9fY2FsbF9fKHNlbGYsICphcmdzLCAqKmt3YXJncykKICAgICAgICBjZWxlcnkuVGFzayA9IENvbnRleHRUYXNrCgogICAgICAgIHJldHVybiBjZWxlcnkKCiAgICBkZWYgX3NldF9yb3V0ZXMoc2VsZik6CiAgICAgICAgZm9yIHJvdXRlIGluIHNlbGYucm91dGVzOgogICAgICAgICAgICBhcHBfdmlldyA9IHJvdXRlLnJlc291cmNlLmFzX3ZpZXcocm91dGUucm91dGVfbmFtZSkKICAgICAgICAgICAgc2VsZi5mbGFza19hcHAuYWRkX3VybF9ydWxlKHJvdXRlLnVybCwgdmlld19mdW5jPWFwcF92aWV3KQoKICAgIGRlZiBfY29uZmlndXJlX2FwcChzZWxmLCBlbnYpOgogICAgICAgIGNlbGVyeV91cmwgPSBlbnYuZ2V0KCdDRUxFUllfVVJMJykKCiAgICAgICAgc2VsZi5mbGFza19hcHAuY29uZmlnWwogICAgICAgICAgICAnU1FMQUxDSEVNWV9EQVRBQkFTRV9VUkknXSA9IGVudi5nZXQoJ0RBVEFCQVNFX1VSTCcpCgogICAgICAgIHNlbGYuZmxhc2tfYXBwLmNvbmZpZ1snQ0VMRVJZX0JST0tFUl9VUkwnXSA9IGVudi5nZXQoCiAgICAgICAgICAgICdSRURJU19VUkwnLCBjZWxlcnlfdXJsKQogICAgICAgIHNlbGYuZmxhc2tfYXBwLmNvbmZpZ1snQ0VMRVJZX1JFU1VMVF9CQUNLRU5EJ10gPSBlbnYuZ2V0KAogICAgICAgICAgICAnUkVESVNfVVJMJywgY2VsZXJ5X3VybCkKCiAgICAgICAgc2VsZi5mbGFza19hcHAuY29uZmlnWydUV0lMSU9fQUNDT1VOVF9TSUQnXSA9IGVudi5nZXQoCiAgICAgICAgICAgICdUV0lMSU9fQUNDT1VOVF9TSUQnKQogICAgICAgIHNlbGYuZmxhc2tfYXBwLmNvbmZpZ1snVFdJTElPX0FVVEhfVE9LRU4nXSA9IGVudi5nZXQoCiAgICAgICAgICAgICdUV0lMSU9fQVVUSF9UT0tFTicpCiAgICAgICAgc2VsZi5mbGFza19hcHAuY29uZmlnWydUV0lMSU9fTlVNQkVSJ10gPSBlbnYuZ2V0KCdUV0lMSU9fTlVNQkVSJykKCiAgICAgICAgc2VsZi5mbGFza19hcHAuc2VjcmV0X2tleSA9IGVudi5nZXQoJ1NFQ1JFVF9LRVknKQoKICAgICAgICBzZWxmLmRiID0gZmxhc2suZXh0LnNxbGFsY2hlbXkuU1FMQWxjaGVteShzZWxmLmZsYXNrX2FwcCkKCiAgICBkZWYgc3RhcnRfYXBwKHNlbGYpOgogICAgICAgIHNlbGYuZmxhc2tfYXBwLnJ1bihkZWJ1Zz1zZWxmLmRlYnVnKQo=</textarea>
+<textarea class="saurus-file" data-file="models/appointment.py" data-mode="python">ZnJvbSBzcWxhbGNoZW15LmV4dC5kZWNsYXJhdGl2ZSBpbXBvcnQgZGVjbGFyYXRpdmVfYmFzZQpmcm9tIHNxbGFsY2hlbXkgaW1wb3J0IENvbHVtbiwgSW50ZWdlciwgRGF0ZVRpbWUsIFN0cmluZwppbXBvcnQgYXJyb3cKCkJhc2UgPSBkZWNsYXJhdGl2ZV9iYXNlKCkKCgpjbGFzcyBBcHBvaW50bWVudChCYXNlKToKICAgIF9fdGFibGVuYW1lX18gPSAnYXBwb2ludG1lbnRzJwoKICAgIGlkID0gQ29sdW1uKEludGVnZXIsIHByaW1hcnlfa2V5PVRydWUpCiAgICBuYW1lID0gQ29sdW1uKFN0cmluZyg1MCksIG51bGxhYmxlPUZhbHNlKQogICAgcGhvbmVfbnVtYmVyID0gQ29sdW1uKFN0cmluZyg1MCksIG51bGxhYmxlPUZhbHNlKQogICAgZGVsdGEgPSBDb2x1bW4oSW50ZWdlciwgbnVsbGFibGU9RmFsc2UpCiAgICB0aW1lID0gQ29sdW1uKERhdGVUaW1lLCBudWxsYWJsZT1GYWxzZSkKICAgIHRpbWV6b25lID0gQ29sdW1uKFN0cmluZyg1MCksIG51bGxhYmxlPUZhbHNlKQoKICAgIGRlZiBfX2luaXRfXyhzZWxmLCBuYW1lLCBwaG9uZV9udW1iZXIsIGRlbHRhLCB0aW1lLCB0aW1lem9uZSk6CiAgICAgICAgc2VsZi5uYW1lID0gbmFtZQogICAgICAgIHNlbGYucGhvbmVfbnVtYmVyID0gcGhvbmVfbnVtYmVyCiAgICAgICAgc2VsZi5kZWx0YSA9IGRlbHRhCiAgICAgICAgc2VsZi50aW1lID0gdGltZQogICAgICAgIHNlbGYudGltZXpvbmUgPSB0aW1lem9uZQoKICAgIGRlZiBfX3JlcHJfXyhzZWxmKToKICAgICAgICByZXR1cm4gJzxBcHBvaW50bWVudCAlcj4nICUgc2VsZi5uYW1lCgogICAgZGVmIGdldF9ub3RpZmljYXRpb25fdGltZShzZWxmKToKICAgICAgICBhcHBvaW50bWVudF90aW1lID0gYXJyb3cuZ2V0KHNlbGYudGltZSkKICAgICAgICByZW1pbmRlcl90aW1lID0gYXBwb2ludG1lbnRfdGltZS5yZXBsYWNlKG1pbnV0ZXM9LXNlbGYuZGVsdGEpCiAgICAgICAgcmV0dXJuIHJlbWluZGVyX3RpbWUK</textarea>
+<textarea class="saurus-file" data-file="views/appointment.py" data-mode="python">ZnJvbSBmbGFzay52aWV3cyBpbXBvcnQgTWV0aG9kVmlldwpmcm9tIGZsYXNrIGltcG9ydCByZW5kZXJfdGVtcGxhdGUKZnJvbSBtb2RlbHMuYXBwb2ludG1lbnQgaW1wb3J0IEFwcG9pbnRtZW50CmZyb20gZm9ybXMubmV3X2FwcG9pbnRtZW50IGltcG9ydCBOZXdBcHBvaW50bWVudEZvcm0KZnJvbSBmbGFzayBpbXBvcnQgcmVxdWVzdCwgcmVkaXJlY3QsIHVybF9mb3IKaW1wb3J0IHJlbWluZGVycwppbXBvcnQgYXJyb3cKCgpjbGFzcyBBcHBvaW50bWVudFJlc291cmNlRGVsZXRlKE1ldGhvZFZpZXcpOgoKICAgIGRlZiBwb3N0KHNlbGYsIGlkKToKICAgICAgICBhcHB0ID0gcmVtaW5kZXJzLmRiLnNlc3Npb24ucXVlcnkoQXBwb2ludG1lbnQpLmZpbHRlcl9ieShpZD1pZCkub25lKCkKICAgICAgICByZW1pbmRlcnMuZGIuc2Vzc2lvbi5kZWxldGUoYXBwdCkKICAgICAgICByZW1pbmRlcnMuZGIuc2Vzc2lvbi5jb21taXQoKQoKICAgICAgICByZXR1cm4gcmVkaXJlY3QodXJsX2ZvcignYXBwb2ludG1lbnQuaW5kZXgnKSwgY29kZT0zMDMpCgoKY2xhc3MgQXBwb2ludG1lbnRSZXNvdXJjZUNyZWF0ZShNZXRob2RWaWV3KToKCiAgICBkZWYgcG9zdChzZWxmKToKICAgICAgICBmb3JtID0gTmV3QXBwb2ludG1lbnRGb3JtKHJlcXVlc3QuZm9ybSkKCiAgICAgICAgaWYgZm9ybS52YWxpZGF0ZSgpOgogICAgICAgICAgICBmcm9tIHRhc2tzIGltcG9ydCBzZW5kX3Ntc19yZW1pbmRlcgoKICAgICAgICAgICAgYXBwdCA9IEFwcG9pbnRtZW50KCoqZm9ybS5kYXRhKQogICAgICAgICAgICBhcHB0LnRpbWUgPSBhcnJvdy5nZXQoYXBwdC50aW1lLCBhcHB0LnRpbWV6b25lKS50bygndXRjJykubmFpdmUKCiAgICAgICAgICAgIHJlbWluZGVycy5kYi5zZXNzaW9uLmFkZChhcHB0KQogICAgICAgICAgICByZW1pbmRlcnMuZGIuc2Vzc2lvbi5jb21taXQoKQogICAgICAgICAgICBzZW5kX3Ntc19yZW1pbmRlci5hcHBseV9hc3luYygKICAgICAgICAgICAgICAgIGFyZ3M9W2FwcHQuaWRdLCBldGE9YXBwdC5nZXRfbm90aWZpY2F0aW9uX3RpbWUoKSkKCiAgICAgICAgICAgIHJldHVybiByZWRpcmVjdCh1cmxfZm9yKCdhcHBvaW50bWVudC5pbmRleCcpLCBjb2RlPTMwMykKICAgICAgICBlbHNlOgogICAgICAgICAgICByZXR1cm4gcmVuZGVyX3RlbXBsYXRlKCdhcHBvaW50bWVudHMvbmV3Lmh0bWwnLCBmb3JtPWZvcm0pLCA0MDAKCgpjbGFzcyBBcHBvaW50bWVudFJlc291cmNlSW5kZXgoTWV0aG9kVmlldyk6CgogICAgZGVmIGdldChzZWxmKToKICAgICAgICBhbGxfYXBwb2ludG1lbnRzID0gcmVtaW5kZXJzLmRiLnNlc3Npb24ucXVlcnkoQXBwb2ludG1lbnQpLmFsbCgpCiAgICAgICAgcmV0dXJuIHJlbmRlcl90ZW1wbGF0ZSgnYXBwb2ludG1lbnRzL2luZGV4Lmh0bWwnLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYXBwb2ludG1lbnRzPWFsbF9hcHBvaW50bWVudHMpCgoKY2xhc3MgQXBwb2ludG1lbnRGb3JtUmVzb3VyY2UoTWV0aG9kVmlldyk6CgogICAgZGVmIGdldChzZWxmKToKICAgICAgICBmb3JtID0gTmV3QXBwb2ludG1lbnRGb3JtKCkKICAgICAgICByZXR1cm4gcmVuZGVyX3RlbXBsYXRlKCdhcHBvaW50bWVudHMvbmV3Lmh0bWwnLCBmb3JtPWZvcm0pCg==</textarea>
 </div>
 </div><div class="saurus-overview"><ul></ul></div></div><div class="saurus-code"><div class="file-path"><span class="crumb-container"></span><i class="fa fa-fw fa-folder"></i></div><div class="saurus-editor"></div></div><div class="saurus-explorer"><div class="saurus-file-list"></div><a href="https://github.com/TwilioDevEd/appointment-reminders-flask" target="_blank" class="explorer-get-code"> <i class="fa fa-lg fa-github-square"> </i>View Code on GitHub</a></div></div></div></div><script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script><script src="ace/ace.js"></script><script src="ace/theme-monokai.js"></script><script src="viewsaurus.js"></script></body></html>
