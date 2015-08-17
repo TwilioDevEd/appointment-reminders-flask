@@ -1,6 +1,7 @@
 # Twilio's Appointment Reminders with Flask
 
 [![Build Status](https://travis-ci.org/TwilioDevEd/appointment-reminders-flask.svg?branch=master)](https://travis-ci.org/TwilioDevEd/appointment-reminders-flask)
+[![Coverage Status](https://coveralls.io/repos/TwilioDevEd/appointment-reminders-flask/badge.svg?branch=master&service=github)](https://coveralls.io/github/TwilioDevEd/appointment-reminders-flask?branch=master)
 
 Use Twilio to send SMS reminders to your customers about upcoming appointments.
 Learn how appointment reminders help other companies in
