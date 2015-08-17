@@ -1,9 +1,17 @@
 {% extends "base.html" %}
 
-{% block title %}All appointments{% endblock %}
-{% block header %}All appointments{% endblock %}
+{% block title %}Home{% endblock %}
+{% block header %}Appointment Reminders with Flask{% endblock %}
 
 {% block content %}
+  <h1></h1>
+  <p>This demo application will show you how to implement SMS appointment reminders with Twilio in <a href="http://flask.pocoo.org/">Flask</a>.</p>
+
+  <p>
+    <a class="btn btn-primary btn-xs" href="/appointment/new">Create a new appointment</a>
+    to see how it works!
+  </p>
+
   {% if appointments %}
   <table class="table">
     <thead>
