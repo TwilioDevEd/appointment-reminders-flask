@@ -277,8 +277,8 @@ var autoShowExplorer = 1280;
 function createFileListItem(fileName, fullPath) {
     // create truncated file name
     var truncFileName = fileName;
-    if (truncFileName.length > 25) {
-        truncFileName = '...' + fileName.substring(fileName.length-25);
+    if (truncFileName.length > 30) {
+        truncFileName = '...' + fileName.substring(fileName.length-30);
     }
     var html = '<li class="saurus-explorer-file" data-file="' + fullPath + '">';
     html += '<i class="fa fa-fw fa-file-text-o"></i>&nbsp;' 

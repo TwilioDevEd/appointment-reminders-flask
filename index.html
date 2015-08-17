@@ -9,7 +9,7 @@
 .wrapper {
   height:100%;
   width:100%;
-}</style><link rel="shortcut icon" href="//twilio.com/bundles/marketing/img/favicons/favicon.ico"><link rel="apple-touch-icon" href="//twilio.com/bundles/marketing/img/favicons/favicon_57.png"><link rel="apple-touch-icon" sizes="72x72" href="//twilio.com/bundles/marketing/img/favicons/favicon_72.png"><link rel="apple-touch-icon" sizes="114x114" href="//twilio.com/bundles/marketing/img/favicons/favicon_114.png"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"><link rel="stylesheet" href="viewsaurus.css"></head><body><div class="wrapper"><div id="viewsaurus" data-title="Appointment reminders"><div class="saurus-panes"><div class="saurus-prose"><div class="saurus-prose-header"><div class="title-outer"><span class="step-title">Appointment reminders</span></div></div><div class="saurus-nav-buttons"><div class="saurus-nav-button nav-overview"><div class="saurus-nav-button-inner"><i class="fa fa-fw fa-list"></i></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-previous"><div class="saurus-nav-button-inner"><a href=""> <i class="fa fa-fw fa-play fa-rotate-180"></i></a></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-next clickable"><div class="saurus-nav-button-inner"><a href="#1"> <i class="fa fa-fw fa-play"></i></a></div></div><div class="saurus-next-title"><span class="next-title-inner"></span></div></div><div class="saurus-progress-bar"></div><div class="saurus-start"><p>Learn to implement appointment reminders functionality with Python and Flask</p><a href="#0">Start Tutorial</a></div><div class="saurus-content"><div data-title="Appointment reminders with Twilio and Flask" class="chapter"><div data-file="tasks.py" data-highlight="11-32" class="step"><h2 id="what-does-this-thing-do-">What does this thing do?</h2>
+}</style><link rel="shortcut icon" href="//twilio.com/bundles/marketing/img/favicons/favicon.ico"><link rel="apple-touch-icon" href="//twilio.com/bundles/marketing/img/favicons/favicon_57.png"><link rel="apple-touch-icon" sizes="72x72" href="//twilio.com/bundles/marketing/img/favicons/favicon_72.png"><link rel="apple-touch-icon" sizes="114x114" href="//twilio.com/bundles/marketing/img/favicons/favicon_114.png"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"><link rel="stylesheet" href="viewsaurus.css"></head><body><div class="wrapper"><div id="viewsaurus" data-title="Appointment reminders"><div class="saurus-panes"><div class="saurus-prose"><div class="saurus-prose-header"><div class="title-outer"><span class="step-title">Appointment reminders</span></div></div><div class="saurus-nav-buttons"><div class="saurus-nav-button nav-overview"><div class="saurus-nav-button-inner"><i class="fa fa-fw fa-list"></i></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-previous"><div class="saurus-nav-button-inner"><a href=""> <i class="fa fa-fw fa-play fa-rotate-180"></i></a></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-next clickable"><div class="saurus-nav-button-inner"><a href="#1"> <i class="fa fa-fw fa-play"></i></a></div></div><div class="saurus-next-title"><span class="next-title-inner"></span></div></div><div class="saurus-progress-bar"></div><div class="saurus-start"><p>Learn to implement appointment reminders functionality with Python and Flask</p><a href="#0">Start Tutorial</a></div><div class="saurus-content"><div data-title="Appointment reminders with Twilio and Flask" class="chapter"><div data-file="tasks.py" class="step"><h2 id="what-does-this-thing-do-">What does this thing do?</h2>
 <p>This web application shows how you can use Twilio to send your
 customers a text message reminding them of upcoming appointments.</p>
 <p>We use <a href="http://flask.pocoo.org/">Flask</a> to build out the web application
@@ -48,11 +48,11 @@ application can be found in the project
 <li><a href="https://www.twilio.com/user/account/phone-numbers/incoming">Your Available Phone Numbers</a></li>
 </ul>
 </div><div data-file="application.py" data-highlight="24-78" class="step"><h2 id="the-application-structure">The application structure</h2>
-<p>The <code>Application</code> object is the heart of any Flask app. Our initializes
+<p>The <code>Application</code> object is the heart of any Flask app. Our&#39;s initializes
 the app, sets the URLs, and pulls in all our environment variables.</p>
-<p>The <code>celery</code> method is just some boilerplate to configure Celery to use
-the settings and context of our Flask application. Our app uses
-<a href="http://redis.io/">Redis</a> as our Celery broker.</p>
+<p>The <code>celery</code> method is boilerplate to configure Celery using settings and 
+context from our Flask application. Our app uses
+<a href="http://redis.io/">Redis</a> as a data store for Celery.</p>
 <p>To get Celery to run locally on your machine, follow the instructions in
 the <a href="https://github.com/TwilioDevEd/appointment-reminders-flask">README</a>.</p>
 <hr>
@@ -99,8 +99,7 @@ task next.</p>
 </ul>
 </div><div data-file="tasks.py" data-highlight="1-11" class="step"><h2 id="set-up-a-twilio-api-client">Set up a Twilio API client</h2>
 <p>Our <code>tasks.py</code> module contains the definition for our <code>send_sms_reminder</code>
-task.</p>
-<p>At the top of this module we use the
+task. At the top of this module we use the
 <a href="https://github.com/twilio/twilio-python">twilio-python</a> library to create
 a new instance of <code>TwilioRestClient</code>.</p>
 <p>We&#39;ll use this <code>client</code> object to send a text message using the Twilio API
@@ -113,8 +112,7 @@ in our <code>send_sms_reminder</code> function. Let&#39;s look at that now.</p>
 </ul>
 </div><div data-file="tasks.py" data-highlight="11-32" class="step"><h2 id="sending-a-reminder">Sending a reminder</h2>
 <p>This is the <code>send_sms_reminder</code> function we called in our
-<code>appointment.create</code> view.</p>
-<p>Our function starts with an <code>appointment_id</code> parameter, which we use to
+<code>appointment.create</code> view. Our function starts with an <code>appointment_id</code> parameter, which we use to
 retrieve an <code>Appointment</code> object from the database - a Celery best
 practice.</p>
 <p>To compose the body of our text message, we use
@@ -130,7 +128,7 @@ stored in our appointment to the local time zone of our customer.</p>
 <li><a href="http://celery.readthedocs.org/en/latest/userguide/tasks.html">Defining Celery tasks</a></li>
 <li><a href="http://crsmithdev.com/arrow/#convert">Arrow time zone conversion</a></li>
 </ul>
-</div><div data-file="tasks.py" data-highlight="11-32" class="step"><h2 id="where-to-next-">Where to next?</h2>
+</div><div data-file="tasks.py" class="step"><h2 id="where-to-next-">Where to next?</h2>
 <p>That&#39;s it! Our Flask application is all set to send out reminders for
 upcoming appointments. We hope you found this sample application useful.</p>
 <p>If you&#39;re a Python developer working with Twilio, you might enjoy these

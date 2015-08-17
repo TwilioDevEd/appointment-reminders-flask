@@ -1,5 +1,5 @@
 .chapter(data-title='Appointment reminders with Twilio and Flask')
-  .step(data-file='tasks.py', data-highlight='11-32')
+  .step(data-file='tasks.py')
     :markdown
       ## What does this thing do?
 
@@ -54,12 +54,12 @@
     :markdown
       ## The application structure
 
-      The `Application` object is the heart of any Flask app. Our initializes
+      The `Application` object is the heart of any Flask app. Our's initializes
       the app, sets the URLs, and pulls in all our environment variables.
 
-      The `celery` method is just some boilerplate to configure Celery to use
-      the settings and context of our Flask application. Our app uses
-      [Redis](http://redis.io/) as our Celery broker.
+      The `celery` method is boilerplate to configure Celery using settings and 
+      context from our Flask application. Our app uses
+      [Redis](http://redis.io/) as a data store for Celery.
 
       To get Celery to run locally on your machine, follow the instructions in
       the [README](https://github.com/TwilioDevEd/appointment-reminders-flask).
@@ -127,9 +127,7 @@
       ## Set up a Twilio API client
 
       Our `tasks.py` module contains the definition for our `send_sms_reminder`
-      task.
-
-      At the top of this module we use the
+      task. At the top of this module we use the
       [twilio-python](https://github.com/twilio/twilio-python) library to create
       a new instance of `TwilioRestClient`.
 
@@ -148,9 +146,7 @@
       ## Sending a reminder
 
       This is the `send_sms_reminder` function we called in our
-      `appointment.create` view.
-
-      Our function starts with an `appointment_id` parameter, which we use to
+      `appointment.create` view. Our function starts with an `appointment_id` parameter, which we use to
       retrieve an `Appointment` object from the database - a Celery best
       practice.
 
@@ -170,7 +166,7 @@
       * [Defining Celery tasks](http://celery.readthedocs.org/en/latest/userguide/tasks.html)
       * [Arrow time zone conversion](http://crsmithdev.com/arrow/#convert)
 
-  .step(data-file='tasks.py', data-highlight='11-32')
+  .step(data-file='tasks.py')
     :markdown
       ## Where to next?
 
