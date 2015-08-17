@@ -85,7 +85,7 @@ You can run the tests locally through [pytest](http://pytest.org/).
 Follow the instructions in the [Local Development](#local-development) section above, and then run:
 
 ```
-py.test --cov .
+py.test --cov
 ```
 
 You can then view the results with `coverage report` or build an HTML report with `coverage html`.
