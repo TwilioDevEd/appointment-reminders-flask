@@ -16,7 +16,9 @@ The easiest way to run this app is by deploying it to [Heroku](https://www.herok
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/TwilioDevEd/appointment-reminders-flask)
 
 After your app deploys, **you must** go to the Heroku dashboard and enable your
-worker dyno to start the Celery worker.
+worker dyno to start the Celery worker:
+
+![Enable Heroku worker](https://s3.amazonaws.com/howtodocs/heroku-enable-worker.png)
 
 ### Local development
 
