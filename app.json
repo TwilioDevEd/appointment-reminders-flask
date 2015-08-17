@@ -29,5 +29,5 @@
   "website": "https://github.com/TwilioDevEd/appointment-reminders-flask",
   "repository": "https://github.com/TwilioDevEd/appointment-reminders-flask",
   "logo": "https://s3.amazonaws.com/howtodocs/twilio-logo.png",
-  "success_url": "/appointment"
+  "success_url": "/"
 }
