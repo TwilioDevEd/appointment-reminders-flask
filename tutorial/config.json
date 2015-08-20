@@ -1,6 +1,6 @@
 {
     "title": "Appointment reminders",
     "repo": "TwilioDevEd/appointment-reminders-flask",
-    "description": "Learn to implement appointment reminders functionality with Python and Flask",
+    "description": "Learn to implement appointment reminders in your web app with Twilio. Appointment reminders allow you to automate the process of reaching out to your customers in advance of an upcoming appointment.",
     "heroku": true
 }
