@@ -7,6 +7,8 @@ Use Twilio to send SMS reminders to your customers about upcoming appointments.
 Learn how appointment reminders help other companies in
 [these Twilio customer stories](https://www.twilio.com/use-cases/appointment-reminders).
 
+[Read the full tutorial here](https://www.twilio.com/docs/tutorials/walkthrough/appointment-reminders/python/flask)!
+
 ## Quickstart
 
 ### Heroku
