@@ -129,7 +129,7 @@
       Our `tasks.py` module contains the definition for our `send_sms_reminder`
       task. At the top of this module we use the
       [twilio-python](https://github.com/twilio/twilio-python) library to create
-      a new instance of `TwilioRestClient`.
+      a new instance of `Client`.
 
       We'll use this `client` object to send a text message using the Twilio API
       in our `send_sms_reminder` function. Let's look at that now.
@@ -156,7 +156,7 @@
 
       After that, sending the message itself is a simple call to
       `client.messages.create()`. We use our customer's phone number as the
-      `to` argument and our Twilio number as the `from` argument.
+      `to` argument and our Twilio number as the `from_` argument.
 
       ---
 
@@ -177,16 +177,16 @@
       other tutorials:
 
       [**Click to Call**](https://www.twilio.com/docs/howto/walkthrough/click-to-call/python/flask)
-      
+
       Put a button on your web page that connects visitors to live support or
       sales people via telephone.
 
       [**Two-Factor Authentication**](https://www.twilio.com/docs/howto/walkthrough/two-factor-authentication/python/flask)
-      
+
       Improve the security of your Flask app's login functionality by adding
       two-factor authentication via text message.
 
       ### Did this help?
-      Thanks for checking out this tutorial! If you have any feedback to share
-      with us, we'd love to hear it. Tweet
-      [@twilio](http://twitter.com/twilio) to let us know what you think.
+      Thanks for checking this tutorial out! If you have any feedback
+      to share with us, we'd love to hear it. [Contact the Twilio Developer
+      Education Team](mailto:deved-oss@twilio.com) to let us know what you think.
