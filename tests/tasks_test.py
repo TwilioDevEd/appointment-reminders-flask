@@ -32,7 +32,7 @@ class TasksTest(BaseTest):
         self.db.session.add(self.newAppt)
         self.db.session.commit()
 
-        with patch('twilio.rest.resources.messages.Messages.create') as create_mock:
+        with patch('twilio.rest.api.v2010.account.message.MessageList.create') as create_mock:
             send_sms_reminder(self.newAppt.id)
             self.assertTrue(create_mock.called)
 
@@ -45,6 +45,6 @@ class TasksTest(BaseTest):
         self.db.session.delete(self.newAppt)
         self.db.session.commit()
 
-        with patch('twilio.rest.resources.messages.Messages.create') as create_mock:
+        with patch('twilio.rest.api.v2010.account.message.MessageList.create') as create_mock:
             send_sms_reminder(idToDelete)
             self.assertFalse(create_mock.called)
