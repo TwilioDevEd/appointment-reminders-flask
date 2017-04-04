@@ -32,7 +32,7 @@ redis==2.10.3
 six==1.9.0
 SQLAlchemy==1.0.7
 stevedore==1.6.0
-twilio==6.0.0rc12
+twilio==6.0.0
 virtualenv==13.0.3
 virtualenv-clone==0.2.6
 virtualenvwrapper==4.6.0
