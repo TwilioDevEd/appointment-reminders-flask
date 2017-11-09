@@ -15,17 +15,6 @@ Learn how appointment reminders help other companies in
 
 ## Quickstart
 
-### Heroku
-
-The easiest way to run this app is by deploying it to [Heroku](https://www.heroku.com/). You can run this app for free in minutes:
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/TwilioDevEd/appointment-reminders-flask)
-
-After your app deploys, **you must** go to the Heroku dashboard and enable your
-worker dyno to start the Celery worker:
-
-![Enable Heroku worker](https://s3.amazonaws.com/howtodocs/heroku-enable-worker.png)
-
 ### Local development
 
 This project is built using the [Flask](http://flask.pocoo.org/) web framework. It runs on Python 2.7+ and Python 3.4+.
