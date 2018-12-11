@@ -53,6 +53,8 @@ To run the app locally, first clone this repository and `cd` into its directory.
     ```bash
     $ alembic upgrade +1
     ```
+    Note: If you have a local postgres installation where you access without password add this line to your `pg_hba.conf` file, *JUST FOR DEVELOPMENT, DO NOT USE THIS IN PRODUCTION*:
+    `host    all             YOUR_USER         127.0.0.1/32            trust`
 
 1. Start a [redis](http://redis.io/) server to be our Celery broker. If on a Mac, we recommend installing redis through [homebrew](http://brew.sh/)
 

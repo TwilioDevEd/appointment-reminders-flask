@@ -15,7 +15,7 @@ class TasksTest(BaseTest):
         'name': 'Mr Praline',
         'phone_number': '+12025550170',
         'delta': '15',
-        'time': '07-28-2015 12:24pm',
+        'time': '28-07-2015 12:24pm',
         'timezone': 'US/Pacific'
     }
 
@@ -32,7 +32,7 @@ class TasksTest(BaseTest):
         self.db.session.add(self.newAppt)
         self.db.session.commit()
 
-        with patch('twilio.rest.api.v2010.account.message.MessageList.create') as create_mock:
+        with patch('twilio.rest.api.v2010.account.message.MessageList.create') as create_mock:  # noqa: E501
             send_sms_reminder(self.newAppt.id)
             self.assertTrue(create_mock.called)
 
@@ -45,6 +45,6 @@ class TasksTest(BaseTest):
         self.db.session.delete(self.newAppt)
         self.db.session.commit()
 
-        with patch('twilio.rest.api.v2010.account.message.MessageList.create') as create_mock:
+        with patch('twilio.rest.api.v2010.account.message.MessageList.create') as create_mock:  # noqa: E501
             send_sms_reminder(idToDelete)
             self.assertFalse(create_mock.called)

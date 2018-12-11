@@ -25,7 +25,14 @@ class AppointmentResourceCreate(MethodView):
         if form.validate():
             from tasks import send_sms_reminder
 
-            appt = Appointment(**form.data)
+            appt = Appointment(
+                name=form.data['name'],
+                phone_number=form.data['phone_number'],
+                delta=form.data['delta'],
+                time=form.data['time'],
+                timezone=form.data['timezone']
+            )
+
             appt.time = arrow.get(appt.time, appt.timezone).to('utc').naive
 
             reminders.db.session.add(appt)
