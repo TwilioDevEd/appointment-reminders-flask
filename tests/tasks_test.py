@@ -1,4 +1,5 @@
 import six
+import datetime
 
 from base_test import BaseTest
 from models.appointment import Appointment
@@ -15,7 +16,7 @@ class TasksTest(BaseTest):
         'name': 'Mr Praline',
         'phone_number': '+12025550170',
         'delta': '15',
-        'time': '28-07-2015 12:24pm',
+        'time': datetime.datetime(2015, 7, 28, 12, 24),
         'timezone': 'US/Pacific'
     }
 
