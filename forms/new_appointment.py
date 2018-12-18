@@ -7,6 +7,7 @@ from pytz import common_timezones
 def _timezones():
     return [(tz, tz) for tz in common_timezones][::-1]
 
+
 appointment_times = [(t, t + " minutes") for t in ['15', '30', '45', '60']]
 
 
