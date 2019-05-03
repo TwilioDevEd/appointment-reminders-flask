@@ -1,8 +1,13 @@
 import flask
 import flask.ext.sqlalchemy
+
 from celery import Celery
-from views.appointment import AppointmentResourceDelete, AppointmentFormResource
-from views.appointment import AppointmentResourceCreate, AppointmentResourceIndex
+from views.appointment import (
+    AppointmentFormResource,
+    AppointmentResourceCreate,
+    AppointmentResourceDelete,
+    AppointmentResourceIndex,
+)
 
 
 class Route(object):
@@ -11,6 +16,7 @@ class Route(object):
         self.url = url
         self.route_name = route_name
         self.resource = resource
+
 
 handlers = [
     Route('/', 'appointment.index', AppointmentResourceIndex),

@@ -3,6 +3,8 @@
 [run]
 source = .
 
-omit = 
+omit =
   migrations/*
   tests/*
+  config/*
+  runapp.py

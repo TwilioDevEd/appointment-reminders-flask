@@ -1,3 +1,7 @@
+<a href="https://www.twilio.com">
+  <img src="https://static0.twilio.com/marketing/bundles/marketing/img/logos/wordmark-red.svg" alt="Twilio" width="250" />
+</a>
+
 # Twilio's Appointment Reminders with Flask
 
 [![Build Status](https://travis-ci.org/TwilioDevEd/appointment-reminders-flask.svg?branch=master)](https://travis-ci.org/TwilioDevEd/appointment-reminders-flask)
@@ -11,17 +15,6 @@ Learn how appointment reminders help other companies in
 
 ## Quickstart
 
-### Heroku
-
-The easiest way to run this app is by deploying it to [Heroku](https://www.heroku.com/). You can run this app for free in minutes:
-
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/TwilioDevEd/appointment-reminders-flask)
-
-After your app deploys, **you must** go to the Heroku dashboard and enable your
-worker dyno to start the Celery worker:
-
-![Enable Heroku worker](https://s3.amazonaws.com/howtodocs/heroku-enable-worker.png)
-
 ### Local development
 
 This project is built using the [Flask](http://flask.pocoo.org/) web framework. It runs on Python 2.7+ and Python 3.4+.
@@ -31,21 +24,21 @@ To run the app locally, first clone this repository and `cd` into its directory.
 1. Create a new virtual environment:
     - If using vanilla [virtualenv](https://virtualenv.pypa.io/en/latest/):
 
-        ```
-        virtualenv venv
-        source venv/bin/activate
+        ```bash
+        $ virtualenv venv
+        $ source venv/bin/activate
         ```
 
     - If using [virtualenvwrapper](https://virtualenvwrapper.readthedocs.org/en/latest/):
 
-        ```
-        mkvirtualenv appointment-reminders
+        ```bash
+        $ mkvirtualenv appointment-reminders
         ```
 
 1. Install the requirements:
 
-    ```
-    pip install -r requirements.txt
+    ```bash
+    $ pip install -r requirements.txt
     ```
 
 1. Start a local PostgreSQL database and create a database called `appointments`:
@@ -57,26 +50,32 @@ To run the app locally, first clone this repository and `cd` into its directory.
 
 1. Run the migrations with:
 
+    ```bash
+    $ alembic upgrade +1
     ```
-    alembic upgrade +1
-    ```
+    Note: If you have a local postgres installation where you access without password add this line to your `pg_hba.conf` file, *JUST FOR DEVELOPMENT, DO NOT USE THIS IN PRODUCTION*:
+    `host    all             YOUR_USER         127.0.0.1/32            trust`
 
 1. Start a [redis](http://redis.io/) server to be our Celery broker. If on a Mac, we recommend installing redis through [homebrew](http://brew.sh/)
 
 1. Start the development server:
 
-    ```
-    python runapp.py
+    ```bash
+    $ python runapp.py
     ```
 
-You can now access the application at [http://localhost:5000](http://localhost:5000). To send any reminders, however, you must also start a separate Celery worker process.
+You can now access the application at
+[http://localhost:5000](http://localhost:5000). To send any reminders, however,
+you must also start a separate Celery worker process.
 
-1. Start a new terminal session, `cd` into the repository, and active your `appointment-reminders` virtualenv
+
+1. Start a new terminal session, `cd` into the repository, and active your
+   `appointment-reminders` virtualenv
 
 1. Start the Celery worker:
 
-    ```
-    celery -A reminders.celery worker -l info
+    ```bash
+    $ celery -A reminders.celery worker -l info
     ```
 
 Celery will now send SMS reminders for any new appointments you create through
@@ -88,8 +87,14 @@ You can run the tests locally through [pytest](http://pytest.org/).
 
 Follow the instructions in the [Local Development](#local-development) section above, and then run:
 
-```
-py.test --cov
+```bash
+$ py.test --cov tests
 ```
 
 You can then view the results with `coverage report` or build an HTML report with `coverage html`.
+
+## Meta
+
+* No warranty expressed or implied. Software is as is. Diggity.
+* [MIT License](http://www.opensource.org/licenses/mit-license.html)
+* Lovingly crafted by Twilio Developer Education.
