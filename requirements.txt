@@ -14,7 +14,7 @@ gnureadline==6.3.8
 gunicorn==19.7.1
 httplib2==0.10.3
 itsdangerous==0.24
-Jinja2==2.10
+Jinja2==2.10.1
 kombu==4.1.0
 Mako==1.0.7
 MarkupSafe==1.0
