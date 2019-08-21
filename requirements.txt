@@ -36,6 +36,6 @@ twilio==6.9.0
 virtualenv==15.1.0
 virtualenv-clone==0.2.6
 virtualenvwrapper==4.8.2
-Werkzeug==0.12.2
+Werkzeug==0.15.3
 wheel==0.30.0
 WTForms==2.1
