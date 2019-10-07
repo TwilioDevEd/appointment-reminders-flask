@@ -24,7 +24,7 @@ psycopg2==2.7.3.2
 py==1.5.2
 PySocks==1.6.7
 pytest==3.3.0
-pytest-cov==2.5.1
+pytest-cov==2.8.1
 pytest-pythonpath==0.7.1
 python-dateutil==2.6.1
 pytz==2017.3
