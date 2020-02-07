@@ -18,7 +18,7 @@ Jinja2==2.10
 kombu==4.1.0
 Mako==1.0.7
 MarkupSafe==1.0
-mock==2.0.0
+mock==4.0.1
 pbr==3.1.1
 psycopg2==2.7.3.2
 py==1.5.2
