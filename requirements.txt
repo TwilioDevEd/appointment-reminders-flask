@@ -12,7 +12,7 @@ Flask-SQLAlchemy==2.3.2
 Flask-WTF==0.14.2
 gnureadline==6.3.8
 gunicorn==19.7.1
-httplib2==0.10.3
+httplib2==0.18.0
 itsdangerous==0.24
 Jinja2==2.10
 kombu==4.1.0
