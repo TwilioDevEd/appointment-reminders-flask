@@ -1,5 +1,5 @@
 import flask
-import flask.ext.sqlalchemy
+from flask_sqlalchemy import SQLAlchemy
 
 from celery import Celery
 from views.appointment import (
@@ -8,6 +8,9 @@ from views.appointment import (
     AppointmentResourceDelete,
     AppointmentResourceIndex,
 )
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class Route(object):
@@ -78,7 +81,7 @@ class Application(object):
 
         self.flask_app.secret_key = env.get('SECRET_KEY')
 
-        self.db = flask.ext.sqlalchemy.SQLAlchemy(self.flask_app)
+        self.db = SQLAlchemy(self.flask_app)
 
     def start_app(self):
         self.flask_app.run(debug=self.debug)

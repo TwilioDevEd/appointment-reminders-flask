@@ -4,14 +4,24 @@
 
 # Twilio's Appointment Reminders with Flask
 
-[![Build Status](https://travis-ci.org/TwilioDevEd/appointment-reminders-flask.svg?branch=master)](https://travis-ci.org/TwilioDevEd/appointment-reminders-flask)
+![](https://github.com/TwilioDevEd/appointment-reminders-flask/workflows/Flask/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/TwilioDevEd/appointment-reminders-flask/badge.svg?branch=master&service=github)](https://coveralls.io/github/TwilioDevEd/appointment-reminders-flask?branch=master)
+
+This template is part of Twilio CodeExchange. If you encounter any issues with this code, please open an issue at github.com/twilio-labs/code-exchange/issues.
+
+## About
 
 Use Twilio to send SMS reminders to your customers about upcoming appointments.
 Learn how appointment reminders help other companies in
 [these Twilio customer stories](https://www.twilio.com/use-cases/appointment-reminders).
 
 [Read the full tutorial here](https://www.twilio.com/docs/tutorials/walkthrough/appointment-reminders/python/flask)!
+
+Implementations in other languages:
+
+| .NET | Java | Python (Django) | PHP | Ruby | Node |
+| :--- | :--- | :-----          | :-- | :--- | :--- |
+| [Done](https://github.com/TwilioDevEd/appointment-reminders-csharp)  | [Done](https://github.com/TwilioDevEd/appointment-reminders-java)  | [Done](https://github.com/TwilioDevEd/appointment-reminders-django) | [Done](https://github.com/TwilioDevEd/appointment-reminders-laravel) | [Done](https://github.com/TwilioDevEd/appointment-reminders-rails) | TBD |
 
 ## Quickstart
 
@@ -45,8 +55,7 @@ To run the app locally, first clone this repository and `cd` into its directory.
     - If on a Mac, we recommend [Postgres.app](http://postgresapp.com/). After install, open psql and run `CREATE DATABASE appointments;`
     - If Postgres is already installed locally, you can just run `createdb appointments` from a terminal
 
-1. Copy the `.env_example` file to `.env`, and edit it to include your credentials for the Twilio API (found at https://www.twilio.com/user/account/voice) and your local Postgres database
-1. Run `source .env` to apply the environment variables (or even better, use [autoenv](https://github.com/kennethreitz/autoenv))
+1. Copy the `.env_example` file to `.env`, and edit it to include your credentials for the Twilio API (found at https://www.twilio.com/user/account/voice) and your local Postgres database.
 
 1. Run the migrations with:
 
