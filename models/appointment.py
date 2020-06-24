@@ -27,5 +27,5 @@ class Appointment(Base):
 
     def get_notification_time(self):
         appointment_time = arrow.get(self.time)
-        reminder_time = appointment_time.replace(minutes=-self.delta)
+        reminder_time = appointment_time.shift(minutes=-self.delta)
         return reminder_time
