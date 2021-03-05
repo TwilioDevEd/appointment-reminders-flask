@@ -4,7 +4,7 @@
 
 # Twilio's Appointment Reminders with Flask
 
-[![Build Status](https://travis-ci.org/TwilioDevEd/appointment-reminders-flask.svg?branch=master)](https://travis-ci.org/TwilioDevEd/appointment-reminders-flask)
+![](https://github.com/TwilioDevEd/appointment-reminders-flask/workflows/Flask/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/TwilioDevEd/appointment-reminders-flask/badge.svg?branch=master&service=github)](https://coveralls.io/github/TwilioDevEd/appointment-reminders-flask?branch=master)
 
 Use Twilio to send SMS reminders to your customers about upcoming appointments.
@@ -108,5 +108,5 @@ You can then view the results with `coverage report` or build an HTML report wit
 ## Meta
 
 * No warranty expressed or implied. Software is as is. Diggity.
-* [MIT License](http://www.opensource.org/licenses/mit-license.html)
+* [MIT License](LICENSE)
 * Lovingly crafted by Twilio Developer Education.
