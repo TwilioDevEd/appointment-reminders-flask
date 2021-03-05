@@ -1,0 +1,16 @@
+alembic
+arrow
+celery
+Flask
+Flask-DebugToolbar
+Flask-SQLAlchemy
+Flask-Migrate
+Flask-WTF
+gunicorn
+redis
+twilio
+python-dotenv
+
+# development
+flake8
+black

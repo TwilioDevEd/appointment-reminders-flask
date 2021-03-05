@@ -21,47 +21,54 @@ This project is built using the [Flask](http://flask.pocoo.org/) web framework. 
 
 To run the app locally, first clone this repository and `cd` into its directory. Then:
 
-1. Create a new virtual environment:
-    - If using vanilla [virtualenv](https://virtualenv.pypa.io/en/latest/):
-
-        ```bash
-        $ virtualenv venv
-        $ source venv/bin/activate
-        ```
-
-    - If using [virtualenvwrapper](https://virtualenvwrapper.readthedocs.org/en/latest/):
-
-        ```bash
-        $ mkvirtualenv appointment-reminders
-        ```
-
-1. Install the requirements:
+1. Create and activate a new python3 virtual environment.
 
     ```bash
-    $ pip install -r requirements.txt
+    python3 -m venv venv
+    source venv/bin/activate
     ```
 
-1. Start a local PostgreSQL database and create a database called `appointments`:
-    - If on a Mac, we recommend [Postgres.app](http://postgresapp.com/). After install, open psql and run `CREATE DATABASE appointments;`
-    - If Postgres is already installed locally, you can just run `createdb appointments` from a terminal
 
-1. Copy the `.env_example` file to `.env`, and edit it to include your credentials for the Twilio API (found at https://www.twilio.com/user/account/voice) and your local Postgres database
-1. Run `source .env` to apply the environment variables (or even better, use [autoenv](https://github.com/kennethreitz/autoenv))
-
-1. Run the migrations with:
+1. Install the requirements using [pip](https://pip.pypa.io/en/stable/installing/).
 
     ```bash
-    $ alembic upgrade +1
+    pip install -r requirements.txt
     ```
-    Note: If you have a local postgres installation where you access without password add this line to your `pg_hba.conf` file, *JUST FOR DEVELOPMENT, DO NOT USE THIS IN PRODUCTION*:
-    `host    all             YOUR_USER         127.0.0.1/32            trust`
 
-1. Start a [redis](http://redis.io/) server to be our Celery broker. If on a Mac, we recommend installing redis through [homebrew](http://brew.sh/)
+1. Copy the `.env.example` file to `.env` and add the following values. Be sure to replace the placeholders and connection string with real information.
+
+   ```
+   SECRET_KEY = 'your_authy_secret_key'
+   
+   TWILIO_ACCOUNT_SID = '[your_twilio_account_sid]'
+   TWILIO_AUTH_TOKEN = '[your_twilio_auth_token]'
+   TWILIO_NUMBER = '[your_twilio_phone_number]'
+   ```
+
+1. Create Flask application variables
+   
+   ```bash
+   export FLASK_APP=reminders 
+   export FLASK_ENV=development
+   ```
+
+1. Run the migrations.
+
+   ```bash
+   flask db upgrade
+   ```
+
+1. Start a [redis](http://redis.io/) server to be our Celery broker. 
+   If on a Mac, we recommend installing redis through [homebrew](http://brew.sh/)
+   If you already have docker installed in your system an easy way of get redis running is:
+   ```bash
+   docker run -d -p 6379:6379 redis:latest
+   ```
 
 1. Start the development server:
 
     ```bash
-    $ python runapp.py
+    flask run
     ```
 
 You can now access the application at
@@ -72,10 +79,16 @@ you must also start a separate Celery worker process.
 1. Start a new terminal session, `cd` into the repository, and active your
    `appointment-reminders` virtualenv
 
+1. Activate Flask development environment
+   
+   ```bash
+   export FLASK_ENV=development
+   ```
+
 1. Start the Celery worker:
 
     ```bash
-    $ celery -A reminders.celery worker -l info
+    celery -A tasks.celery worker -l info
     ```
 
 Celery will now send SMS reminders for any new appointments you create through
@@ -83,12 +96,11 @@ the web app.
 
 ## Run the tests
 
-You can run the tests locally through [pytest](http://pytest.org/).
-
-Follow the instructions in the [Local Development](#local-development) section above, and then run:
+You can run the tests locally. Follow the instructions in the
+[Local Development](#local-development) section above, and then run:
 
 ```bash
-$ py.test --cov tests
+python runtests.py
 ```
 
 You can then view the results with `coverage report` or build an HTML report with `coverage html`.
