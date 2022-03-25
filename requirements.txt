@@ -20,7 +20,7 @@ Flask-SQLAlchemy==2.4.4
 Flask-WTF==0.14.3
 gunicorn==20.0.4
 idna==2.10
-itsdangerous==1.1.0
+itsdangerous==2.1.2
 Jinja2==2.11.3
 kombu==5.0.2
 Mako==1.1.4
