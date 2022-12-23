@@ -14,3 +14,4 @@ python-dotenv
 # development
 flake8
 black
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
