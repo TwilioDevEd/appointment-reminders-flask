@@ -1,4 +1,4 @@
-alembic==1.5.4
+alembic==1.9.2
 amqp==5.0.5
 appdirs==1.4.4
 arrow==0.17.0
